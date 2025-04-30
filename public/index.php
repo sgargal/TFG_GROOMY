@@ -7,6 +7,18 @@
     <link rel="icon" href="../src/logoGROOMY-fondosin.png">
 </head>
 <body>
-
+    <header>
+        <?php
+        include '../app/views/layout/header.php';
+        ?>
+    </header>
+    <main>
+        <h1>Bienvenido a GROOMY</h1>
+    </main>
+    <footer>
+        <?php
+        include '../app/views/layout/footer.php';
+        ?>
+    </footer>
 </body>
 </html>

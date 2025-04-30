@@ -7,9 +7,15 @@
     <link rel="icon" href="../../../src/logoGROOMY-fondosin.png">
 </head>
 <body>
-    <header>
-        <img src="../src/logoGROOMY-fondoNegro.png" alt="Logo GROOMY">
-        <button type="submit" class="btnSign" href="../app/views/formSign.php"> REGÍSTRATE </button>
+    <header class="header-inicio">
+        <nav>
+            <img src="../src/logoGROOMY-fondoNegro.png" alt="Logo GROOMY">
+            <ul>
+                <li><a href="../app/views/formSign.php">REGÍSTRATE</a></li>
+                <li><a href="../app/views/formLogin.php">INICIA SESIÓN</a></li>
+            </ul>
+        </nav>
+        
     </header>
 </body>
 </html>
