@@ -17,7 +17,7 @@
 
   <article class="faq-item">
     <h3>¿Cómo puedo registrar mi barbería en GROOMY?</h3>
-    <p>Si tienes una barbería y quieres unirte a nuestra plataforma, contáctanos a través del <a href="contactanos.php"> formulario </a>del correo info@groomy.com</p>
+    <p>Si tienes una barbería y quieres unirte a nuestra plataforma, contáctanos a través del <a href="contactanos.php"><strong> formulario </strong></a>del correo info@groomy.com</p>
   </article>
 
   <article class="faq-item">
