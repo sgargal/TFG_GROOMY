@@ -15,8 +15,8 @@
             <ul>
                 <!-- SUSTITUIR POR REDES DE VERDAD -->
                 <li><img src="../src/logoInsta.png"></li>
-                <li><img src="../src/logoInsta.png"></li>
-                <li><img src="../src/logoInsta.png"></li>
+                <li><img src="../src/logoFacebook.png"></li>
+                <li><img src="../src/logoX.png"></li>
             </ul>
         </nav>
         
