@@ -9,12 +9,11 @@
 <body>
     <footer class="footer">
         <nav>
-            <ul>
+            <ul class="footer-links">
                 <li><a href="../app/views/etc/preguntas.php">PREGUNTAS FRECUENTES</a></li>
                 <li><a href="../app/views/etc/contactanos.php">CONTÁCTANOS</a></li>
             </ul>
-            <ul>
-                <!-- SUSTITUIR POR REDES DE VERDAD -->
+            <ul class="footer-redes">
                 <li><a href="https://www.instagram.com/"><img src="../fuentes/src/logoInsta.png"></a></li>
                 <li><a href="https://www.facebook.com/"><img src="../fuentes/src/logoFacebook.png"></a></li>
                 <li><a href="https://x.com/"><img src="../fuentes/src/logoX.png"></a></li>
