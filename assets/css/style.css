@@ -134,8 +134,69 @@ footer.footer img:hover {
 }
 
 .modal-content {
-    background: white;
+    font-family: 'Monserrat', sans-serif;
+    background: #111;
+    color: #fff;
     padding: 2rem;
+    border-radius: 12px;
+    width: 340px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.7);
+}
+
+.model-content h2 {
+    margin-top: 0;
+    margin-bottom: 1.5rem;
+    color: #35bfb8;
+    text-align: center;
+}
+
+.modal-content label {
+    display: block;
+    margin: 10px 0 5px;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.modal-content input {
+    width: 100%;
+    padding: 10px;
+    border: none;
     border-radius: 8px;
-    width: 300px;
+    background: #222;
+    color: #fff;
+    font-size: 14px;
+    outline: none;
+    box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.4);
+}
+
+.modal-content button[type="submit"] {
+    width: 100%;
+    margin-top: 20px;
+    padding: 10px;
+    background-color: #35bfb8;
+    color: white;
+    border: none;
+    border-radius: 12px;
+    font-weight: bold;
+    font-size: 14px;
+    cursor: pointer;
+    box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.4);
+    transition: background-color 0.3s ease;
+}
+
+.modal-content button[type="submit"]:hover {
+    background-color: #2aa29b;
+}
+
+.modal-content button:not([type="submit"]) {
+    background: transparent;
+    color: #aaa;
+    border: none;
+    margin-top: 10px;
+    cursor: pointer;
+    text-decoration: underline;
+    font-size: 13px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
 }
