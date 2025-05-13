@@ -14,9 +14,9 @@
                 <li><a href="../app/views/etc/contactanos.php">CONTÁCTANOS</a></li>
             </ul>
             <ul class="footer-redes">
-                <li><a href="https://www.instagram.com/"><img src="../assets/src/logoInsta.png"></a></li>
-                <li><a href="https://www.facebook.com/"><img src="../assets/src/logoFacebook.png"></a></li>
-                <li><a href="https://x.com/"><img src="../assets/src/logoX.png"></a></li>
+                <li><a href="https://www.instagram.com/" target="_blank"><img src="../assets/src/logoInsta.png"></a></li>
+                <li><a href="https://www.facebook.com/" target="_blank"><img src="../assets/src/logoFacebook.png"></a></li>
+                <li><a href="https://x.com/" target="_blank"><img src="../assets/src/logoX.png"></a></li>
             </ul>
         </nav>
         
