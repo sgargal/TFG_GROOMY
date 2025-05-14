@@ -21,7 +21,7 @@ body {
 }
 
 h1 {
-    font-family: 'Monserrat', sans-serif;
+  font-family: 'Monserrat', sans-serif;
   color: #00d1d1;
   text-align: center;
   margin-bottom: 3rem;
@@ -123,4 +123,47 @@ button[type="submit"] {
 
 button[type="submit"]:hover {
   background-color: #00bbbb;
+}
+
+.search-container {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 2rem;
+  max-width: 400px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+input[type="text"] {
+  flex: 1;
+  padding: 0.75rem 1rem;
+  border-radius: 6px;
+  border: none;
+  background-color: #222;
+  color: #fff;
+  font-size: 1rem;
+  font-family: 'Montserrat', sans-serif;
+  transition: background 0.3s, border 0.3s;
+}
+
+input[type="text"]::placeholder {
+  color: #888;
+}
+
+input[type="text"]:focus {
+  outline: none;
+  border: 1px solid #00d1d1;
+  background-color: #1a1a1a;
+}
+
+.search-container i.fas.fa-search {
+  color: #00d1d1;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.search-container i.fas.fa-search:hover {
+  transform: scale(1.2);
 }
