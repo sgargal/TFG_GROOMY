@@ -181,3 +181,50 @@ input[type="text"]:focus {
 .search-container i.fas.fa-search:hover {
   transform: scale(1.2);
 }
+
+ul {
+  display: flex;
+  gap: 20px;
+}
+
+li{
+  list-style: none;
+  --color: #ff0050;
+}
+
+#socials {
+  display: flex;
+  width: 100px;
+  height: 100px;
+  background: #18191f;
+  border-radius: 15px;
+  box-shadow:
+    -2px -2px 3px #ffffff,
+    3px 3px 3px #00000033;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  transition: all .2s ease-in-out;
+}
+
+.fa-brands {
+  font-size: 44px;
+  color: #555;
+}
+
+#socials:hover .fa-brands {
+  color: var(--color);
+  text-shadow: 0 0 30px var(--color);
+}
+
+li:nth-child(2) {
+  --color: #1c7dd5;
+}
+
+li:nth-child(3) {
+  --color: #ffffff;
+}
+
+li:first-child {
+  --color: #e65877;
+}
