@@ -11,13 +11,18 @@
 </head>
 <body>
   <section id="app">
-    <buttom class="btn-back">
+    <button class="btn-back">
       <a href="../../../public/index.php"><i class="fas fa-arrow-left"></i>Volver</a>
-    </buttom>
-    <h1>PREGUNTAS FRECUENTES</h1>
+    </button>
 
-    <input type="text" v-model="search" placeholder="Buscar..."> <i class="fas fa-search"></i>
-    
+    <section class="faq-header">
+      <h1>PREGUNTAS FRECUENTES</h1>
+
+      <section class="search-container">
+        <i class="fas fa-search"></i> <input type="text" v-model="search" placeholder="Buscar...">
+      </section>
+    </section>
+
     <article class="faq-item" v-for="(faq, index) in filtrandoFaqs" :key="index">
       <h3> {{ faq.pregunta }}</h3>
       <p v-html="faq.respuesta"></p>
