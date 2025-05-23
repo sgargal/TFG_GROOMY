@@ -7,18 +7,17 @@
     <title>GROOMY</title>
     <link rel="icon" href="../../../src/logoGROOMY-fondosin.png">
     <link rel="stylesheet" href="../assets/css/style.css">
-    <script src="https://cdn.jsdelivr.net/npm/vue@3/dist/vue.global.prod.js"></script>
-    <script src="js/loginApp.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@3/dist/vue.global.js"></script>
 </head>
 
 <body>
     <div id="app">
         <header class="header-inicio">
             <nav>
-                <img src="../src/logoGROOMY-fondoNegro.png" alt="Logo GROOMY">
+                <img src="../assets/src/logoGROOMY-fondoNegro.png" alt="Logo GROOMY">
                 <ul>
-                    <li><a href="#" @click="mostrarSign = true">REGÍSTRATE</a></li>
-                    <li><a href="#" @click="mostrarLogin = true">INICIA SESIÓN</a></li>
+                    <li><button @click="mostrarSign = true">REGÍSTRATE</button></li>
+                    <li><button @click="mostrarLogin = true">INICIA SESIÓN</button></li>
                 </ul>
             </nav>
         </header>
@@ -26,14 +25,14 @@
             <section v-if="mostrarSign" class="modal-overlay">
                 <section class="modal-content">
                     <h2>Registrar</h2>
-                    <form>
-                        <label for="nombre">Nombre: </label>
-                        <input type="text" id="nombre" required>
-                        <label for="email">Email:</label>
-                        <input type="email" id="email" required>
-                        <label for="password">Contraseña:</label>
-                        <input type="password" id="password" required>
-                        <button type="submit">Registrar</button>
+                    <form @submit.prevent="registrar">
+                        <label for="nombreRegistro">Nombre: </label>
+                        <input type="text" id="nombreRegistro" v-model="registro.nombre" required>
+                        <label for="emailRegistro">Email:</label>
+                        <input type="email" id="emailRegistro" v-model="registro.email" required>
+                        <label for="passwordRegistro">Contraseña:</label>
+                        <input type="password" id="passwordRegistro" v-model="registro.password" required>
+                        <button type="submit">REGISTRAR</button>
                     </form>
                     <button @click="cerrarRegistro">Cerrar</button>
                 </section>
@@ -41,18 +40,18 @@
             <section v-if="mostrarLogin" class="modal-overlay">
                 <section class="modal-content">
                     <h2>Iniciar Sesión</h2>
-                    <form>
-                        <label for="email">Email:</label>
-                        <input type="email" id="email" required>
-                        <label for="password">Contraseña:</label>
-                        <input type="password" id="password" required>
-                        <button type="submit">Entrar</button>
+                    <form @submit.prevent="login">
+                        <label for="emailLogin">Email:</label>
+                        <input type="email" id="emailLogin" v-model="login.email" required>
+                        <label for="passwordLogin">Contraseña:</label>
+                        <input type="password" id="passwordLogin" v-model="login.password" required>
+                        <button type="submit">INICIAR SESIÓN</button>
                     </form>
                     <button @click="cerrarLogin">Cerrar</button>
                 </section>
             </section>
         </main>
     </div>
+    <script src="js/loginApp.js" defer></script>
 </body>
-
 </html>

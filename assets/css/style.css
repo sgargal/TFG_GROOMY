@@ -42,7 +42,7 @@ body {
     padding: 0;
 }
 
-.header-inicio ul li a {
+.header-inicio ul li button {
     text-decoration: none;
     color: white;
     background-color: #39a9a7;
@@ -54,7 +54,7 @@ body {
     transition: background-color 0.3s ease;
 }
 
-.header-inicio ul li a:hover {
+.header-inicio ul li button:hover {
     background-color: #1f746f;
 }
 
@@ -158,7 +158,7 @@ footer.footer img:hover {
 }
 
 .modal-content input {
-    width: 80%;
+    width: 94%;
     padding: 10px;
     border: none;
     border-radius: 8px;

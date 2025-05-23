@@ -95,11 +95,20 @@ body {
   background-color: #111;
   padding: 2rem;
   border-radius: 8px;
-  box-shadow: 0 0 10px rgba(91, 120, 121);
+  box-shadow: 0 0 10px rgb(95, 222, 226);
 }
 
 .faq-contact h3 {
   color: #00d1d1;
+}
+
+.faq-contact h2 {
+  font-size: 1.75rem;
+  font-weight: bolda;
+  color: #fff;
+  margin-top: 0;
+  margin-bottom: 1erm;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
 }
 
 .faq-contact form {
@@ -182,6 +191,36 @@ input[type="text"]:focus {
   transform: scale(1.2);
 }
 
+.contact-info {
+  font-size: 1rem;
+  color: #ccc;
+  margin-bottom: 1.2rem;
+  line-height: 1.6;
+}
+
+.contact-info a {
+  color: #00d1d1;
+  font-weight: bold;
+  text-decoration: none;
+  transition: text-shadow 0.2s;
+}
+
+.contact-info a:hover {
+  text-shadow: 0 0 6px #00d1d1;
+}
+
+.faq-contact strong {
+  color: #fff;
+  font-weight: bold;
+}
+
+.social-links ul {
+  display: flex;
+  gap: 20px;
+  padding: 0;
+  margin: 0;
+  justify-content: flex-start;
+}
 ul {
   display: flex;
   gap: 20px;
@@ -194,8 +233,8 @@ li{
 
 #socials {
   display: flex;
-  width: 100px;
-  height: 100px;
+  width: 60px;
+  height: 60px;
   background: #18191f;
   border-radius: 15px;
   box-shadow:
@@ -208,7 +247,7 @@ li{
 }
 
 .fa-brands {
-  font-size: 44px;
+  font-size: 30px;
   color: #555;
 }
 
@@ -222,7 +261,7 @@ li:nth-child(2) {
 }
 
 li:nth-child(3) {
-  --color: #ffffff;
+  --color: #a0f1f7;
 }
 
 li:first-child {
