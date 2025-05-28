@@ -58,6 +58,39 @@ body {
     background-color: #1f746f;
 }
 
+.boton-perfil {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    color: white;
+    background-color: #39a9a7;
+    padding: 10px 15px;
+    border-radius: 12px;
+    font-weight: bold;
+    font-size: 15px;
+    box-shadow: 2px 2px 5px rgb(91, 120, 121);
+    transition: background-color 0.3s ease;
+    font-family: 'Monserrat', sans-serif;
+}
+
+.boton-perfil:hover {
+    background-color: #1f746f;
+}
+
+.imagen-perfil {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.icono-perfil {
+    font-size: 24px;
+    vertical-align: middle;
+}
+
+
 
 footer.footer {
     background: #000;

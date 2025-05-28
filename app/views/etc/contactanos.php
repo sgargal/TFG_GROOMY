@@ -31,7 +31,7 @@
       <ul>
         <li><a href="https://www.instagram.com/" target="_blank" id="socials"><i class="fa-brands fa-instagram"></i></a></li>
         <li><a href="https://www.facebook.com/" target="_blank" id="socials"><i class="fa-brands fa-facebook"></i></a></li>
-        <li><a href="https://x.com/" target="_blank" id="socials"><i class="fa-brands fa-x"></i></a></li>
+        <li><a href="https://x.com/" target="_blank" id="socials"><i class="fa-brands fa-twitter"></i></a></li>
         <li><a href="https://www.tiktok.com/" target="_blank" id="socials"><i class="fa-brands fa-tiktok"></i></a></li>
       </ul>
     </section>

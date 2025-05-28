@@ -2,7 +2,6 @@
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
-var_dump($_SESSION); 
 $usuario = $_SESSION['usuario'] ?? null;
 ?>
 <!DOCTYPE html>
@@ -14,6 +13,7 @@ $usuario = $_SESSION['usuario'] ?? null;
     <title>GROOMY</title>
     <link rel="icon" href="../../../src/logoGROOMY-fondosin.png">
     <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/vue@3/dist/vue.global.js"></script>
 </head>
 
@@ -24,7 +24,17 @@ $usuario = $_SESSION['usuario'] ?? null;
                 <img src="../assets/src/logoGROOMY-fondoNegro.png" alt="Logo GROOMY">
                 <ul>
                     <?php if ($usuario): ?>
-                        <li><button>Perfil</button></li>
+                        <li>
+                            <a href="../app/views/usuario/perfil.php" class = "boton-perfil">
+                                <?php if (!empty($_SESSION['usuario']['imagen'])): ?>
+                                    <img src="<?= htmlspecialchars($_SESSION['usuario']['imagen']) ?>">
+                                <?php else: ?>
+                                    <i class="fa fa-user"></i>
+                                <?php endif; ?>
+                                <?= htmlspecialchars($_SESSION['usuario']['nombre']) ?>
+                            </a>
+                        </li>
+                        <li><a href="../app/views/usuario/citas.php" class = "boton-perfil"><i class = "fa fa-calendar"></i>Citas</a></li>
                         <li><button>Cerrar Sesión</button></li>
                     <?php else: ?>
                         <li><button @click="mostrarSign = true">REGÍSTRATE</button></li>
@@ -66,4 +76,5 @@ $usuario = $_SESSION['usuario'] ?? null;
     </div>
     <script src="js/loginApp.js" defer></script>
 </body>
+
 </html>

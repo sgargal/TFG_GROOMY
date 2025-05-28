@@ -11,7 +11,11 @@ $model = new Usuario();
 $usuario = $model->login($email, $password);
 
 if ($usuario) {
-    $_SESSION['usuario'] = $usuario['email'];
+    $_SESSION['usuario'] = [
+        'email' => $usuario['email'],
+        'nombre' => $usuario['nombre'],
+        'imagen' => $usuario['imagen']
+    ];
 
     header("Location: ../index.php");
     exit;
