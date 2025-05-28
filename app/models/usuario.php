@@ -18,7 +18,7 @@ class Usuario {
     private Conexion $db;
 
 
-    public function __construct($id = null, $nombre, $email, $password, $rol, $imagen) {
+    public function __construct($id = null, $nombre = null, $email = null, $password = null, $rol = null, $imagen = null) {
         $this->id = $id;
         $this->nombre = $nombre;
         $this->email = $email;

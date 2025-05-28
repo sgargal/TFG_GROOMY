@@ -31,7 +31,13 @@ class UsuarioController {
         $usuario = new Usuario(null, $nombre, $email, $password, 'user', null);
         $mensaje = $usuario->registrar();
 
-        echo $mensaje;
+        // Comprobar si el mensaje indica éxito
+        $success = ($mensaje === 'Usuario registrado correctamente');
+
+        echo json_encode([
+            'success' => $success,
+            'mensaje' => $mensaje
+        ]);
         exit();
     }
 
@@ -43,12 +49,15 @@ class UsuarioController {
         $usuario = $usuarioModel->login($email, $password);
 
         if(!$usuario) {
-            echo "Usuario o contraseña incorrectos";
+            echo json_encode([
+                'success' => false,
+                'mensaje' => 'Usuario o contraseña incorrectos'
+            ]);
             exit();
         } 
         
         $_SESSION['usuario'] = $usuario;
-        echo "Inicio de sesión exitoso";
+        echo json_encode(['success' => true, 'mensaje' => 'Inicio de sesión exitoso']);
         exit();
     }
 
@@ -57,8 +66,7 @@ class UsuarioController {
         if(preg_match('/^[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+$/', $nombre)){
             return $nombre;
         } else {
-            $_SESSION['mensaje'] = ['tipo' => 'error', 'contenido' => "El nombre no es válido"];
-            header('Location: ../views/usuario/formularioRegistro.php');
+            echo json_encode(['error' => 'El nombre solo puede contener letras y espacios']);
             exit();
         }
     }
@@ -68,19 +76,17 @@ class UsuarioController {
         if(filter_var($email, FILTER_VALIDATE_EMAIL)){
             return $email;
         } else {
-            $_SESSION['mensaje'] = ['tipo' => 'error', 'contenido' => "El email no es válido"];
-            header('Location: ../views/usuario/formularioRegistro.php');
+            echo json_encode(['error' => 'El email no es válido']);
             exit();
         }
     }
 
     public function validarPassword($password){
         $password = trim($password);
-        if(strlen($password) >= 8){
+        if(strlen($password) >= 3){
             return $password;
         } else {
-            $_SESSION['mensaje'] = ['tipo' => 'error', 'contenido' => 'La contraseña debe tener al menos 8 caracteres'];
-            header('Location: ../views/usuario/formularioRegistro.php');
+            echo json_encode(['error' => 'La contraseña debe tener al menos 3 caracteres']);
             exit();
         }
     }

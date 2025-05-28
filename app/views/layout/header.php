@@ -1,3 +1,10 @@
+<?php
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+var_dump($_SESSION); 
+$usuario = $_SESSION['usuario'] ?? null;
+?>
 <!DOCTYPE html>
 <html lang="es">
 
@@ -16,8 +23,13 @@
             <nav>
                 <img src="../assets/src/logoGROOMY-fondoNegro.png" alt="Logo GROOMY">
                 <ul>
-                    <li><button @click="mostrarSign = true">REGÍSTRATE</button></li>
-                    <li><button @click="mostrarLogin = true">INICIA SESIÓN</button></li>
+                    <?php if ($usuario): ?>
+                        <li><button>Perfil</button></li>
+                        <li><button>Cerrar Sesión</button></li>
+                    <?php else: ?>
+                        <li><button @click="mostrarSign = true">REGÍSTRATE</button></li>
+                        <li><button @click="mostrarLogin = true">INICIA SESIÓN</button></li>
+                    <?php endif; ?>
                 </ul>
             </nav>
         </header>
@@ -42,9 +54,9 @@
                     <h2>Iniciar Sesión</h2>
                     <form @submit.prevent="login">
                         <label for="emailLogin">Email:</label>
-                        <input type="email" id="emailLogin" v-model="login.email" required>
+                        <input type="email" id="emailLogin" v-model="datosLogin.email" required>
                         <label for="passwordLogin">Contraseña:</label>
-                        <input type="password" id="passwordLogin" v-model="login.password" required>
+                        <input type="password" id="passwordLogin" v-model="datosLogin.password" required>
                         <button type="submit">INICIAR SESIÓN</button>
                     </form>
                     <button @click="cerrarLogin">Cerrar</button>

@@ -10,7 +10,7 @@ const App = defineComponent({
         email: '',
         password: ''
       },
-      login: {
+      datosLogin: {
         email: '',
         password: ''
       },
@@ -39,28 +39,28 @@ const App = defineComponent({
         console.error(error);
       }
     },
-    async login() {
-      try {
-        const formData = new FormData();
-        formData.append('action', 'login');
-        formData.append('email', this.login.email);
-        formData.append('password', this.login.password);
+    login() {
+      const formData = new FormData();
+      formData.append('email', this.datosLogin.email);
+      formData.append('password', this.datosLogin.password);
 
-        const res = await fetch('/dashboard/groomy//public/api/usuario.php', {
-          method: 'POST',
-          body: formData
-        });
-
-        const texto = await res.text();
-        this.mensaje = texto;
-        alert(texto);
-
-        if (texto.includes("Login exitoso")) {
-          window.location.href = '../index.php';
+      fetch('api/login.php', {
+        method: 'POST',
+        body: formData,
+        credentials: 'same-origin'
+      })
+      .then(res => {
+        if (res.redirected) {
+          window.location.href = res.url;
+        } else {
+          return res.text().then(text => {
+            if(text.trim() === 'ok') {
+              alert('Credenciales incorrectas');
+            }
+          });
         }
-      } catch (error) {
-        console.error(error);
-      }
+      })
+        .catch (error => console.error('Error: ', error));
     },
     cerrarLogin() {
       this.mostrarLogin = false;
