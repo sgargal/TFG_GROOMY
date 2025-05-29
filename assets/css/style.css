@@ -42,7 +42,10 @@ body {
     padding: 0;
 }
 
-.header-inicio ul li button {
+.boton-estandar {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
     text-decoration: none;
     color: white;
     background-color: #39a9a7;
@@ -52,11 +55,15 @@ body {
     font-size: 15px;
     box-shadow: 2px 2px 5px rgb(91, 120, 121);
     transition: background-color 0.3s ease;
+    font-family: 'Monserrat', sans-serif;
+    border: none;
+    cursor: pointer;
 }
 
-.header-inicio ul li button:hover {
+.boton-estandar:hover {
     background-color: #1f746f;
 }
+
 
 .boton-perfil {
     display: flex;
@@ -233,3 +240,124 @@ footer.footer img:hover {
     margin-left: auto;
     margin-right: auto;
 }
+
+.modal-overlay-perfil {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    text-align: center;
+}
+
+.modal-content-perfil {
+    font-family: 'Montserrat', sans-serif;
+    background: #111;
+    color: #fff;
+    padding: 2.5rem;
+    border-radius: 16px;
+    width: 450px;
+    max-width: 90vw;
+    box-shadow: 0 0 25px rgba(0, 0, 0, 0.8);
+}
+
+.modal-content-perfil h2 {
+    margin-top: 0;
+    margin-bottom: 1.5rem;
+    color: #35bfb8;
+    text-align: center;
+}
+
+/* Imagen de perfil */
+.modal-content-perfil img {
+    border-radius: 50%;
+    border: 3px solid #35bfb8;
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    margin-top: 10px;
+    box-shadow: 0 0 10px rgba(53, 191, 184, 0.5);
+}
+
+/* Botón editar y cerrar */
+.modal-content-perfil button.boton-estandar {
+    margin-top: 20px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 10px 20px;
+    background-color: #35bfb8;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-weight: bold;
+    font-size: 14px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    justify-content: center;
+}
+
+.modal-content-perfil button.boton-estandar:hover{
+    background-color: #2aa29b;
+}
+
+.modal-content-perfil button:not([type="submit"]) {
+    background: transparent;
+    color: #aaa;
+    border: none;
+    margin-top: 10px;
+    cursor: pointer;
+    text-decoration: underline;
+    font-size: 13px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+.perfil {
+    max-width: 600px;
+    margin: 40px auto;
+    background-color: #f0f0f0;
+    padding: 30px;
+    border-radius: 16px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    font-family: 'Monserrat', sans-serif;
+    color: #111;
+}
+
+.perfil h2 {
+    text-align: center;
+    color: #222;
+    margin-bottom: 25px;
+}
+
+.perfil-datos p {
+    margin: 12px 0;
+    font-size: 16px;
+    text-align: center;
+}
+
+.perfil-datos strong {
+    color: #000;
+    font-weight: 700;
+}
+
+.perfil-datos img {
+    display: block;
+    margin-top: 10px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.4);
+}
+

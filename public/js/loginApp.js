@@ -5,6 +5,7 @@ const App = defineComponent({
     return {
       mostrarLogin: false,
       mostrarSign: false,
+      mostrarPerfil: false,
       registro: {
         nombre: '',
         email: '',
@@ -14,8 +15,20 @@ const App = defineComponent({
         email: '',
         password: ''
       },
+      usuario: {
+        nombre: '',
+        email: '',
+        imagen: '',
+      },
       mensaje: ''
     };
+  },
+   mounted() {
+    // Si ya tienes al usuario en PHP, puedes pasarlo con una variable global
+    const usuarioPHP = window.usuarioPHP;
+    if (usuarioPHP) {
+      this.usuario = usuarioPHP;
+    }
   },
   methods: {
     async registrar() {
@@ -67,7 +80,10 @@ const App = defineComponent({
     },
     cerrarRegistro() {
       this.mostrarSign = false;
-    }
+    },
+    cerrarPerfil() {
+      this.mostrarPerfil = false;
+    },
   }
 });
 

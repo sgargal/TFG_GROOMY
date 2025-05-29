@@ -11,10 +11,13 @@ $usuario = $_SESSION['usuario'] ?? null;
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GROOMY</title>
-    <link rel="icon" href="../../../src/logoGROOMY-fondosin.png">
+    <link rel="icon" href="../../../assets/src/logoGROOMY-fondosin.png">
     <link rel="stylesheet" href="../assets/css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/vue@3/dist/vue.global.js"></script>
+    <script>
+        window.usuarioPHP = <?= json_encode($_SESSION['usuario'] ?? null) ?>;
+    </script>
 </head>
 
 <body>
@@ -25,20 +28,20 @@ $usuario = $_SESSION['usuario'] ?? null;
                 <ul>
                     <?php if ($usuario): ?>
                         <li>
-                            <a href="../app/views/usuario/perfil.php" class = "boton-perfil">
+                            <button @click="mostrarPerfil = true" class="boton-estandar">
                                 <?php if (!empty($_SESSION['usuario']['imagen'])): ?>
                                     <img src="<?= htmlspecialchars($_SESSION['usuario']['imagen']) ?>">
                                 <?php else: ?>
                                     <i class="fa fa-user"></i>
                                 <?php endif; ?>
                                 <?= htmlspecialchars($_SESSION['usuario']['nombre']) ?>
-                            </a>
+                            </button>
                         </li>
-                        <li><a href="../app/views/usuario/citas.php" class = "boton-perfil"><i class = "fa fa-calendar"></i>Citas</a></li>
-                        <li><button>Cerrar Sesión</button></li>
+                        <li><a href="../app/views/usuario/citas.php" class="boton-perfil"><i class="fa fa-calendar"></i>Citas</a></li>
+                        <li><button class="boton-cerrar">Cerrar Sesión</button></li>
                     <?php else: ?>
-                        <li><button @click="mostrarSign = true">REGÍSTRATE</button></li>
-                        <li><button @click="mostrarLogin = true">INICIA SESIÓN</button></li>
+                        <li><button @click="mostrarSign = true" class="boton-estandar">REGÍSTRATE</button></li>
+                        <li><button @click="mostrarLogin = true" class="boton-estandar">INICIA SESIÓN</button></li>
                     <?php endif; ?>
                 </ul>
             </nav>
@@ -54,7 +57,7 @@ $usuario = $_SESSION['usuario'] ?? null;
                         <input type="email" id="emailRegistro" v-model="registro.email" required>
                         <label for="passwordRegistro">Contraseña:</label>
                         <input type="password" id="passwordRegistro" v-model="registro.password" required>
-                        <button type="submit">REGISTRAR</button>
+                        <button type="submit" class="boton-estandar">REGISTRAR</button>
                     </form>
                     <button @click="cerrarRegistro">Cerrar</button>
                 </section>
@@ -67,9 +70,22 @@ $usuario = $_SESSION['usuario'] ?? null;
                         <input type="email" id="emailLogin" v-model="datosLogin.email" required>
                         <label for="passwordLogin">Contraseña:</label>
                         <input type="password" id="passwordLogin" v-model="datosLogin.password" required>
-                        <button type="submit">INICIAR SESIÓN</button>
+                        <button type="submit" class="boton-estandar">INICIAR SESIÓN</button>
                     </form>
                     <button @click="cerrarLogin">Cerrar</button>
+                </section>
+            </section>
+            <section v-if="mostrarPerfil" class="modal-overlay-perfil">
+                <section class="modal-content-perfil">
+                    <h2>Perfil de Usuario</h2>
+                    <p><strong>Nombre:</strong> {{ usuario.nombre }}</p>
+                    <p><strong>Email:</strong> {{ usuario.email }}</p>
+                    <p v-if="usuario.imagen"><strong>Imagen:</strong><br>
+                        <img :src="usuario.imagen" alt="Imagen de perfil" width="150">
+                    </p>
+                    <p v-else><strong>Imagen:</strong><br><br><img src="../assets/src/sinImagen.png"></p>
+                    <button type="submit" class="boton-estandar" onclick="window.location.href='../app/views/usuario/perfil.php'"><i class="fa fa-user-edit"></i> EDITAR</button>
+                    <button @click="cerrarPerfil">Cerrar</button>
                 </section>
             </section>
         </main>
