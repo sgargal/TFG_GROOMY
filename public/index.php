@@ -1,5 +1,11 @@
 <?php
 session_start();
+require_once '../app/controllers/UsuarioController.php';
+
+use App\Controllers\UsuarioController;
+
+
+$controller = new UsuarioController();
 ?>
 <!DOCTYPE html>
 <html lang="es">

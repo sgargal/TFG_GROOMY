@@ -80,5 +80,42 @@ class Usuario {
         }
     }
 
+    public function editarUsuario($id, $nombre, $email, $password, $img, $rol) {
+        try {
+            $this->db = new Conexion();
+
+            if(!empty($password)) {
+                $passwordHash = password_hash($password, PASSWORD_BCRYPT);
+                $sql = "UPDATE usuarios
+                        SET nombre = :nombre, email = :email, password = :password, imagen = :imagen, rol = :rol
+                        WHERE id = :id";
+            }else {
+                $sql = "UPDATE usuarios
+                        SET nombre = :nombre, email = :email, imagen = :imagen, rol = :rol
+                        WHERE id = :id";
+            }
+
+            $stmt = $this->db->Conectar()->prepare($sql);
+            $stmt->bindParam(':id', $id);
+            $stmt->bindParam(':nombre', $nombre);
+            $stmt->bindParam(':email', $email);
+            if(!empty($password)) {
+                $stmt->bindParam(':password', $passwordHash);
+            }
+            $stmt->bindParam(':imagen', $img);
+            $stmt->bindParam(':rol', $rol);
+
+            $resultado = $stmt->execute();
+            $this->db->cerrarBD();
+            if($resultado) {
+                return "Perfil actualizado correctamente";
+            } else {
+                return "Error al actualizar el perfil";
+            }
+        }catch (PDOException $e) {
+            return "Error: " . $e->getMessage();
+        }
+    }
+
 }
 ?>

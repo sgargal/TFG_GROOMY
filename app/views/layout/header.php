@@ -24,13 +24,13 @@ $usuario = $_SESSION['usuario'] ?? null;
     <div id="app">
         <header class="header-inicio">
             <nav>
-                <img src="../assets/src/logoGROOMY-fondoNegro.png" alt="Logo GROOMY">
+                <img src="../assets/src/logoGROOMY-fondoNegro.png" alt="Logo GROOMY" height="150" width="150">
                 <ul>
                     <?php if ($usuario): ?>
                         <li>
                             <button @click="mostrarPerfil = true" class="boton-estandar">
                                 <?php if (!empty($_SESSION['usuario']['imagen'])): ?>
-                                    <img src="<?= htmlspecialchars($_SESSION['usuario']['imagen']) ?>">
+                                    <img src="../assets/src/users/<?= $_SESSION['usuario']['imagen'] ?>" alt="Foto usuario" class="imagen-perfil" />
                                 <?php else: ?>
                                     <i class="fa fa-user"></i>
                                 <?php endif; ?>
@@ -84,7 +84,7 @@ $usuario = $_SESSION['usuario'] ?? null;
                         <img :src="usuario.imagen" alt="Imagen de perfil" width="150">
                     </p>
                     <p v-else><strong>Imagen:</strong><br><br><img src="../assets/src/sinImagen.png"></p>
-                    <button type="submit" class="boton-estandar" onclick="window.location.href='../app/views/usuario/perfil.php'"><i class="fa fa-user-edit"></i> EDITAR</button>
+                    <button type="submit" class="boton-estandar" onclick="window.location.href='../app/views/usuario/editarPerfil.php'"><i class="fa fa-user-edit"></i> Editar</button>
                     <button @click="cerrarPerfil">Cerrar</button>
                 </section>
             </section>

@@ -15,6 +15,9 @@ class UsuarioController {
                     case 'login':
                         $this->login();
                         break;
+                    case 'editarPerfil':
+                        $this->editarPerfil();
+                        break;
                     default:
                         echo "Acción no válida";
                         break;
@@ -58,6 +61,52 @@ class UsuarioController {
         
         $_SESSION['usuario'] = $usuario;
         echo json_encode(['success' => true, 'mensaje' => 'Inicio de sesión exitoso']);
+        exit();
+    }
+
+    public function editarPerfil() {
+        $nombre = $this->validarNombre($_POST['nombre']);
+        $email = $this->validarEmail($_POST['email']);
+        $img = $_FILES['img'] ?? null;
+
+        if(!$nombre || !$email){
+            echo json_encode(['error' => 'Nombre o email no válidos']);
+            exit();
+        }
+        $nombreImg = null;  // nombre archivo para BD y sesión
+
+        if ($img && $img['error'] === UPLOAD_ERR_OK) {
+            $nombreImg = uniqid() . "_" . basename($img['name']);
+            $rutaDestino = __DIR__ . '/../../assets/src/users/' . $nombreImg;
+
+            if (!move_uploaded_file($img['tmp_name'], $rutaDestino)) {
+                echo json_encode(['error' => 'Error al subir la imagen']);
+                exit();
+            }
+        } else {
+            // Si no sube nueva imagen, conservar la actual ruta web
+            $nombreImg = $_SESSION['usuario']['imagen'] ?? null;
+        }
+
+        $usuario = new Usuario($_SESSION['usuario']['id'], $nombre, $email, null, $_SESSION['usuario']['rol'], $nombreImg);
+
+        $resultado = $usuario->editarUsuario(
+            $_SESSION['usuario']['id'],
+            $nombre,
+            $email,
+            null,
+            $nombreImg,
+            $_SESSION['usuario']['rol']
+        );
+
+        // Guardar en sesión solo el nombre o ruta web, NO la ruta física
+        $_SESSION['usuario']['nombre'] = $nombre;
+        $_SESSION['usuario']['email'] = $email;
+        $_SESSION['usuario']['imagen'] = $nombreImg;
+
+        $_SESSION['mensaje'] = $resultado;
+
+        header('Location: /dashboard/groomy/public/index.php');
         exit();
     }
 

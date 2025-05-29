@@ -29,9 +29,9 @@ body {
     padding: 0 30px;
 }
 
-.header-inicio img {
+/* .header-inicio img {
     height: 130px;
-}
+} */
 
 /* Estilos para el menú */
 .header-inicio ul {
@@ -85,6 +85,28 @@ body {
     background-color: #1f746f;
 }
 
+.boton-cerrar {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    color: white;
+    background-color: #8f0606;
+    padding: 10px 15px;
+    border-radius: 12px;
+    font-weight: bold;
+    font-size: 15px;
+    box-shadow: 2px 2px 5px rgb(222, 113, 113);
+    transition: background-color 0.3s ease;
+    font-family: 'Monserrat', sans-serif;
+    border: none;
+    cursor: pointer;
+}
+
+.boton-cerrar:hover {
+    background-color: #690303;
+}
+
 .imagen-perfil {
     width: 30px;
     height: 30px;
@@ -96,8 +118,6 @@ body {
     font-size: 24px;
     vertical-align: middle;
 }
-
-
 
 footer.footer {
     background: #000;
