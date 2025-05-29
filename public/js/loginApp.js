@@ -6,6 +6,7 @@ const App = defineComponent({
       mostrarLogin: false,
       mostrarSign: false,
       mostrarPerfil: false,
+      mostrarCerrarSesion:false,
       registro: {
         nombre: '',
         email: '',
@@ -24,7 +25,6 @@ const App = defineComponent({
     };
   },
    mounted() {
-    // Si ya tienes al usuario en PHP, puedes pasarlo con una variable global
     const usuarioPHP = window.usuarioPHP;
     if (usuarioPHP) {
       this.usuario = usuarioPHP;
@@ -75,6 +75,9 @@ const App = defineComponent({
       })
         .catch (error => console.error('Error: ', error));
     },
+    cerrarSesion(){
+      window.location.href = '../public/api/logout.php';
+    },
     cerrarLogin() {
       this.mostrarLogin = false;
     },
@@ -84,6 +87,9 @@ const App = defineComponent({
     cerrarPerfil() {
       this.mostrarPerfil = false;
     },
+    cerrarCerrarSesion(){
+      this.mostrarCerrarSesion = false;
+    }
   }
 });
 

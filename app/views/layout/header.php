@@ -38,7 +38,7 @@ $usuario = $_SESSION['usuario'] ?? null;
                             </button>
                         </li>
                         <li><a href="../app/views/usuario/citas.php" class="boton-perfil"><i class="fa fa-calendar"></i>Citas</a></li>
-                        <li><button class="boton-cerrar">Cerrar Sesión</button></li>
+                        <li><button @click="mostrarCerrarSesion = true"class="boton-cerrar">Cerrar Sesión</button></li>
                     <?php else: ?>
                         <li><button @click="mostrarSign = true" class="boton-estandar">REGÍSTRATE</button></li>
                         <li><button @click="mostrarLogin = true" class="boton-estandar">INICIA SESIÓN</button></li>
@@ -86,6 +86,14 @@ $usuario = $_SESSION['usuario'] ?? null;
                     <p v-else><strong>Imagen:</strong><br><br><img src="../assets/src/sinImagen.png"></p>
                     <button type="submit" class="boton-estandar" onclick="window.location.href='../app/views/usuario/editarPerfil.php'"><i class="fa fa-user-edit"></i> Editar</button>
                     <button @click="cerrarPerfil">Cerrar</button>
+                </section>
+            </section>
+            <section v-if="mostrarCerrarSesion" class="modal-overlay-cerrar">
+                <section class="modal-content-cerrar">
+                    <h2>¿Estás seguro de que quieres cerrar sesión?</h2>
+                    <button @click="cerrarSesion" class="boton-cerrar">Sí, cerrar sesión</button>
+                    <br>
+                    <button @click="cerrarCerrarSesion" class="boton-estandar">Cancelar</button>
                 </section>
             </section>
         </main>
