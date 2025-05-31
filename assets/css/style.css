@@ -58,6 +58,8 @@ body {
     font-family: 'Monserrat', sans-serif;
     border: none;
     cursor: pointer;
+    text-align: center;
+    justify-content: center;
 }
 
 .boton-estandar:hover {
@@ -430,3 +432,98 @@ footer.footer img:hover {
     box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.4);
 }
 
+/* --- FORMULARIO DE INICIO DE SESIÓN --- */
+.formulario-container {
+    font-family: 'Monserrat', sans-serif;
+    max-width: 400px;
+    margin: 40px auto;
+    background-color: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.formulario-container h1 {
+    text-align: center;
+    font-size: 2rem;
+    color: #39a9a7;
+    margin-bottom: 20px;
+}
+
+.formulario-container form label {
+    display: block;
+    font-size: 1.1rem;
+    color: #010101;
+    margin-bottom: 5px;
+
+}
+
+.formulario-container form input[type="text"],
+.formulario-container form input[type="email"]{
+    width: 94%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1rem;
+    background-color: #f4f4f4;
+    transition: border-color 0.3s;
+}
+
+.formulario-container form input[type="text"]:focus,
+.formulario-container form input[type="email"]:focus {
+    border-color: #39a9a7;
+    background-color: #e7f9f5;
+    outline: none;
+}
+.formulario-container .imagen-actual {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.formulario-container .imagen-actual img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    margin-top: 10px;
+}
+
+.formulario-container input[type="file"] {
+    display: block;
+    width: 96%;
+    padding: 8px;
+    font-size: 1rem;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f4f4f4;
+    transition: border-color 0.3s;
+}
+
+.formulario-container input[type="file"]:focus {
+    border-color: #39a9a7;
+    outline: none;
+}
+
+
+.formulario-container form input[type="submit"] {
+    background-color: #39a9a7;
+    color: white;
+    padding: 12px;
+    width: 100%;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+    width: 100%;
+}
+
+.formulario-container form input[type="submit"]:hover {
+    background-color: #1e5756;
+    transform: scale(1);
+}

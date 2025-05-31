@@ -2,6 +2,6 @@ Arreglos
 - Los mensajes
 - No salta "Credenciales no válidas"
 - El registro de usuario, funciona pero no se recarga la pagina una vez que se registra
-- Botones de enviar login y de registro
-- Guardar img de usuario en la bd
+- Guardar datos actualizados de usuario en la bd
+
 

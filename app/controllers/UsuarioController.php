@@ -7,6 +7,11 @@ use App\Models\Usuario;
 class UsuarioController {
     public function __construct() {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            // echo "<pre>";
+            // print_r($_POST);
+            // print_r($_FILES);
+            // echo "</pre>";
+            // exit;
             if(isset($_POST['action'])) {
                 switch($_POST['action']) {
                     case 'registrar': 
@@ -58,6 +63,8 @@ class UsuarioController {
             ]);
             exit();
         } 
+        var_dump($_SESSION['usuario']['id']);
+        exit();
         
         $_SESSION['usuario'] = $usuario;
         echo json_encode(['success' => true, 'mensaje' => 'Inicio de sesión exitoso']);
@@ -73,7 +80,8 @@ class UsuarioController {
             echo json_encode(['error' => 'Nombre o email no válidos']);
             exit();
         }
-        $nombreImg = null;  // nombre archivo para BD y sesión
+
+        $nombreImg = null;
 
         if ($img && $img['error'] === UPLOAD_ERR_OK) {
             $nombreImg = uniqid() . "_" . basename($img['name']);
@@ -83,9 +91,6 @@ class UsuarioController {
                 echo json_encode(['error' => 'Error al subir la imagen']);
                 exit();
             }
-        } else {
-            // Si no sube nueva imagen, conservar la actual ruta web
-            $nombreImg = $_SESSION['usuario']['imagen'] ?? null;
         }
 
         $usuario = new Usuario($_SESSION['usuario']['id'], $nombre, $email, null, $_SESSION['usuario']['rol'], $nombreImg);
@@ -98,11 +103,13 @@ class UsuarioController {
             $nombreImg,
             $_SESSION['usuario']['rol']
         );
-
+        echo json_encode(['mensaje' => $resultado]);
         // Guardar en sesión solo el nombre o ruta web, NO la ruta física
         $_SESSION['usuario']['nombre'] = $nombre;
         $_SESSION['usuario']['email'] = $email;
-        $_SESSION['usuario']['imagen'] = $nombreImg;
+        if ($nombreImg) {
+            $_SESSION['usuario']['imagen'] = $nombreImg;
+        }
 
         $_SESSION['mensaje'] = $resultado;
 

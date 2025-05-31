@@ -74,6 +74,25 @@ const App = defineComponent({
         }
       })
         .catch (error => console.error('Error: ', error));
+      // const formData = new FormData();
+      // formData.append('action', 'login'); // <--- IMPORTANTE
+      // formData.append('email', this.datosLogin.email);
+      // formData.append('password', this.datosLogin.password);
+
+      // fetch('/dashboard/groomy/public/index.php', {
+      //   method: 'POST',
+      //   body: formData,
+      //   credentials: 'same-origin'
+      // })
+      // .then(res => res.json())
+      // .then(data => {
+      //   if (data.success) {
+      //     location.reload(); // o redirigir, cerrar modal, etc.
+      //   } else {
+      //     alert(data.mensaje || 'Credenciales incorrectas');
+      //   }
+      // })
+      // .catch(error => console.error('Error:', error));
     },
     cerrarSesion(){
       window.location.href = '../public/api/logout.php';

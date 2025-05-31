@@ -80,39 +80,53 @@ class Usuario {
         }
     }
 
-    public function editarUsuario($id, $nombre, $email, $password, $img, $rol) {
+    public function editarUsuario($id, $nombre, $email, $password = null, $img = null, $rol)
+    {
         try {
             $this->db = new Conexion();
 
-            if(!empty($password)) {
+            $sql = "UPDATE usuarios SET nombre = :nombre, email = :email, rol = :rol";
+
+            if (!empty($password)) {
+                $sql .= ", password = :password";
                 $passwordHash = password_hash($password, PASSWORD_BCRYPT);
-                $sql = "UPDATE usuarios
-                        SET nombre = :nombre, email = :email, password = :password, imagen = :imagen, rol = :rol
-                        WHERE id = :id";
-            }else {
-                $sql = "UPDATE usuarios
-                        SET nombre = :nombre, email = :email, imagen = :imagen, rol = :rol
-                        WHERE id = :id";
             }
+
+            if (!empty($img)) {
+                $sql .= ", imagen = :imagen";
+            }
+
+            $sql .= " WHERE id = :id";
 
             $stmt = $this->db->Conectar()->prepare($sql);
-            $stmt->bindParam(':id', $id);
+
             $stmt->bindParam(':nombre', $nombre);
             $stmt->bindParam(':email', $email);
-            if(!empty($password)) {
+            $stmt->bindParam(':rol', $rol);
+            $stmt->bindParam(':id', $id);
+
+            if (!empty($password)) {
                 $stmt->bindParam(':password', $passwordHash);
             }
-            $stmt->bindParam(':imagen', $img);
-            $stmt->bindParam(':rol', $rol);
+
+            if (!empty($img)) {
+                $stmt->bindParam(':imagen', $img);
+            }
 
             $resultado = $stmt->execute();
+            if (!$resultado) {
+                $error = $stmt->errorInfo();
+                return "Error al ejecutar: " . $error[2];
+            }
+
             $this->db->cerrarBD();
-            if($resultado) {
+
+            if ($resultado) {
                 return "Perfil actualizado correctamente";
             } else {
-                return "Error al actualizar el perfil";
+                return "Error al actualizar el perfil (consulta no ejecutada)";
             }
-        }catch (PDOException $e) {
+        } catch (PDOException $e) {
             return "Error: " . $e->getMessage();
         }
     }

@@ -45,7 +45,7 @@ if (!$usuario) {
 
                 <label for="img">Imagen actual:</label><br>
                 <?php if (!empty($usuario['imagen'])): ?>
-                    <img src="<?= htmlspecialchars($usuario['imagen']) ?>" alt="Imagen actual" width="100"><br>
+                    <img src="../../../assets/src/users/<?= htmlspecialchars($usuario['imagen']) ?>" alt="Imagen actual" width="100">
                 <?php else: ?>
                     <img src="../../../assets/src/sinImagen.png" alt="Sin imagen" width="100"><br>
                 <?php endif; ?>
