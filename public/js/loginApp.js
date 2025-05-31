@@ -54,45 +54,24 @@ const App = defineComponent({
     },
     login() {
       const formData = new FormData();
+      formData.append('action', 'login');
       formData.append('email', this.datosLogin.email);
       formData.append('password', this.datosLogin.password);
 
-      fetch('api/login.php', {
+      fetch('/dashboard/groomy/public/index.php', {
         method: 'POST',
         body: formData,
         credentials: 'same-origin'
       })
-      .then(res => {
-        if (res.redirected) {
-          window.location.href = res.url;
-        } else {
-          return res.text().then(text => {
-            if(text.trim() === 'ok') {
-              alert('Credenciales incorrectas');
-            }
-          });
-        }
-      })
-        .catch (error => console.error('Error: ', error));
-      // const formData = new FormData();
-      // formData.append('action', 'login'); // <--- IMPORTANTE
-      // formData.append('email', this.datosLogin.email);
-      // formData.append('password', this.datosLogin.password);
-
-      // fetch('/dashboard/groomy/public/index.php', {
-      //   method: 'POST',
-      //   body: formData,
-      //   credentials: 'same-origin'
-      // })
-      // .then(res => res.json())
-      // .then(data => {
-      //   if (data.success) {
-      //     location.reload(); // o redirigir, cerrar modal, etc.
-      //   } else {
-      //     alert(data.mensaje || 'Credenciales incorrectas');
-      //   }
-      // })
-      // .catch(error => console.error('Error:', error));
+        .then(res => res.json())
+        .then(data => {
+          if (data.success) {
+            location.reload();
+          } else {
+            alert(data.mensaje || 'Credenciales incorrectas');
+          }
+        })
+        .catch(error => console.error('Error:', error));
     },
     cerrarSesion(){
       window.location.href = '../public/api/logout.php';

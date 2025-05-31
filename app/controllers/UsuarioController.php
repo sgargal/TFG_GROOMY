@@ -1,17 +1,17 @@
 <?php 
 namespace App\Controllers;
 
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
+
 require_once __DIR__ . '/../models/usuario.php';
 use App\Models\Usuario;
 
 class UsuarioController {
     public function __construct() {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            // echo "<pre>";
-            // print_r($_POST);
-            // print_r($_FILES);
-            // echo "</pre>";
-            // exit;
             if(isset($_POST['action'])) {
                 switch($_POST['action']) {
                     case 'registrar': 
@@ -62,10 +62,9 @@ class UsuarioController {
                 'mensaje' => 'Usuario o contraseña incorrectos'
             ]);
             exit();
-        } 
-        var_dump($_SESSION['usuario']['id']);
-        exit();
-        
+        }
+
+
         $_SESSION['usuario'] = $usuario;
         echo json_encode(['success' => true, 'mensaje' => 'Inicio de sesión exitoso']);
         exit();
@@ -80,9 +79,7 @@ class UsuarioController {
             echo json_encode(['error' => 'Nombre o email no válidos']);
             exit();
         }
-
-        $nombreImg = null;
-
+        // Si no se sube nueva imagen, mantener la anterior
         if ($img && $img['error'] === UPLOAD_ERR_OK) {
             $nombreImg = uniqid() . "_" . basename($img['name']);
             $rutaDestino = __DIR__ . '/../../assets/src/users/' . $nombreImg;
@@ -91,6 +88,9 @@ class UsuarioController {
                 echo json_encode(['error' => 'Error al subir la imagen']);
                 exit();
             }
+        } else {
+            // Mantener imagen actual
+            $nombreImg = $_SESSION['usuario']['imagen'] ?? null;
         }
 
         $usuario = new Usuario($_SESSION['usuario']['id'], $nombre, $email, null, $_SESSION['usuario']['rol'], $nombreImg);
@@ -103,8 +103,8 @@ class UsuarioController {
             $nombreImg,
             $_SESSION['usuario']['rol']
         );
-        echo json_encode(['mensaje' => $resultado]);
-        // Guardar en sesión solo el nombre o ruta web, NO la ruta física
+       
+
         $_SESSION['usuario']['nombre'] = $nombre;
         $_SESSION['usuario']['email'] = $email;
         if ($nombreImg) {

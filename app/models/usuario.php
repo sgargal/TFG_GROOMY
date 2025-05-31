@@ -2,6 +2,7 @@
 namespace App\Models;
 use Config\Conexion;
 
+
 require_once __DIR__ . '/../config/Conexion.php';
 
 use PDO;
@@ -80,56 +81,52 @@ class Usuario {
         }
     }
 
-    public function editarUsuario($id, $nombre, $email, $password = null, $img = null, $rol)
-    {
-        try {
-            $this->db = new Conexion();
+    public function editarUsuario($id, $nombre, $email, $password = null, $img = null, $rol) {
+    try {
+        $this->db = new Conexion();
 
-            $sql = "UPDATE usuarios SET nombre = :nombre, email = :email, rol = :rol";
+        $sql = "UPDATE usuarios SET nombre = :nombre, email = :email, rol = :rol";
 
-            if (!empty($password)) {
-                $sql .= ", password = :password";
-                $passwordHash = password_hash($password, PASSWORD_BCRYPT);
-            }
-
-            if (!empty($img)) {
-                $sql .= ", imagen = :imagen";
-            }
-
-            $sql .= " WHERE id = :id";
-
-            $stmt = $this->db->Conectar()->prepare($sql);
-
-            $stmt->bindParam(':nombre', $nombre);
-            $stmt->bindParam(':email', $email);
-            $stmt->bindParam(':rol', $rol);
-            $stmt->bindParam(':id', $id);
-
-            if (!empty($password)) {
-                $stmt->bindParam(':password', $passwordHash);
-            }
-
-            if (!empty($img)) {
-                $stmt->bindParam(':imagen', $img);
-            }
-
-            $resultado = $stmt->execute();
-            if (!$resultado) {
-                $error = $stmt->errorInfo();
-                return "Error al ejecutar: " . $error[2];
-            }
-
-            $this->db->cerrarBD();
-
-            if ($resultado) {
-                return "Perfil actualizado correctamente";
-            } else {
-                return "Error al actualizar el perfil (consulta no ejecutada)";
-            }
-        } catch (PDOException $e) {
-            return "Error: " . $e->getMessage();
+        if (!empty($password)) {
+            $sql .= ", password = :password";
+            $passwordHash = password_hash($password, PASSWORD_BCRYPT);
         }
+
+        if (!empty($img)) {
+            $sql .= ", imagen = :imagen";
+        }
+
+        $sql .= " WHERE id = :id";
+
+        $stmt = $this->db->Conectar()->prepare($sql);
+
+        $stmt->bindParam(':nombre', $nombre);
+        $stmt->bindParam(':email', $email);
+        $stmt->bindParam(':rol', $rol);
+        $stmt->bindParam(':id', $id);
+
+        if (!empty($password)) {
+            $stmt->bindParam(':password', $passwordHash);
+        }
+
+        if (!empty($img)) {
+            $stmt->bindParam(':imagen', $img);
+        }
+
+        $resultado = $stmt->execute();
+        $this->db->cerrarBD();
+
+        if ($resultado) {
+            return "Perfil actualizado correctamente";
+        } else {
+            return "Error al actualizar el perfil";
+        }
+
+    } catch (PDOException $e) {
+        return "Error: " . $e->getMessage();
     }
+}
+
 
 }
 ?>

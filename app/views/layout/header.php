@@ -3,6 +3,8 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 $usuario = $_SESSION['usuario'] ?? null;
+$rol = (is_array($usuario) && isset($usuario['rol'])) ? $usuario['rol'] : null;
+
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -27,22 +29,29 @@ $usuario = $_SESSION['usuario'] ?? null;
                 <img src="../assets/src/logoGROOMY-fondoNegro.png" alt="Logo GROOMY" height="150" width="150">
                 <ul>
                     <?php if ($usuario): ?>
-                        <li>
-                            <button @click="mostrarPerfil = true" class="boton-estandar">
-                                <?php if (!empty($_SESSION['usuario']['imagen'])): ?>
-                                    <img src="../assets/src/users/<?= $_SESSION['usuario']['imagen'] ?>" alt="Foto usuario" class="imagen-perfil" />
-                                <?php else: ?>
-                                    <i class="fa fa-user"></i>
-                                <?php endif; ?>
-                                <?= htmlspecialchars($_SESSION['usuario']['nombre']) ?>
-                            </button>
-                        </li>
-                        <li><a href="../app/views/usuario/citas.php" class="boton-perfil"><i class="fa fa-calendar"></i>Citas</a></li>
-                        <li><button @click="mostrarCerrarSesion = true"class="boton-cerrar">Cerrar Sesión</button></li>
+                        <?php if ($rol === 'admin'): ?>
+                            <li>
+                                <button @click="mostrarPanelAdmin = true" class="boton-estandar">Panel Admin</button>
+                            </li>
+                        <?php else: ?>
+                            <li>
+                                <button @click="mostrarPerfil = true" class="boton-estandar">
+                                    <?php if (!empty($usuario['imagen'])): ?>
+                                        <img src="../assets/src/users/<?= $usuario['imagen'] ?>" alt="Foto usuario" class="imagen-perfil" />
+                                    <?php else: ?>
+                                        <i class="fa fa-user"></i>
+                                    <?php endif; ?>
+                                    <?= htmlspecialchars($usuario['nombre']) ?>
+                                </button>
+                            </li>
+                            <li><a href="../app/views/usuario/citas.php" class="boton-perfil"><i class="fa fa-calendar"></i>Citas</a></li>
+                            <li><button @click="mostrarCerrarSesion = true" class="boton-cerrar">Cerrar Sesión</button></li>
+                        <?php endif; ?>
                     <?php else: ?>
                         <li><button @click="mostrarSign = true" class="boton-estandar">REGÍSTRATE</button></li>
                         <li><button @click="mostrarLogin = true" class="boton-estandar">INICIA SESIÓN</button></li>
                     <?php endif; ?>
+
                 </ul>
             </nav>
         </header>
