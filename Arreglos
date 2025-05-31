@@ -1,7 +1,4 @@
 Arreglos
-- Los mensajes
-- No salta "Credenciales no válidas"
+- Los mensajes(actualizar perfil solo, lo demas hecho)
 - El registro de usuario, funciona pero no se recarga la pagina una vez que se registra
-- Guardar datos actualizados de usuario en la bd
-
-
+- En firefox no carga el icono del logo

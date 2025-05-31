@@ -66,6 +66,10 @@ $rol = (is_array($usuario) && isset($usuario['rol'])) ? $usuario['rol'] : null;
                         <input type="email" id="emailRegistro" v-model="registro.email" required>
                         <label for="passwordRegistro">Contraseña:</label>
                         <input type="password" id="passwordRegistro" v-model="registro.password" required>
+
+                        <p v-if="mensaje" :class="tipoMensaje === 'error' ? 'mensaje-error' : 'mensaje-exito'">{{ mensaje }}</p>
+
+
                         <button type="submit" class="boton-estandar">REGISTRAR</button>
                     </form>
                     <button @click="cerrarRegistro">Cerrar</button>
@@ -80,6 +84,10 @@ $rol = (is_array($usuario) && isset($usuario['rol'])) ? $usuario['rol'] : null;
                         <label for="passwordLogin">Contraseña:</label>
                         <input type="password" id="passwordLogin" v-model="datosLogin.password" required>
                         <button type="submit" class="boton-estandar">INICIAR SESIÓN</button>
+
+                        <p v-if="mensaje" :class="tipoMensaje === 'error' ? 'mensaje-error' : 'mensaje-exito'">{{ mensaje }}</p>
+
+                        <p>¿No tienes cuenta? <a href="#" @click="mostrarSign = true; mostrarLogin = false">Regístrate</a></p>
                     </form>
                     <button @click="cerrarLogin">Cerrar</button>
                 </section>

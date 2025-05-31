@@ -21,12 +21,16 @@ const App = defineComponent({
         email: '',
         imagen: '',
       },
-      mensaje: ''
+      mensaje: '',
+      tipoMensaje: ''
     };
   },
-   mounted() {
+  mounted() {
     const usuarioPHP = window.usuarioPHP;
     if (usuarioPHP) {
+      if (usuarioPHP.imagen) {
+        usuarioPHP.imagen = `/dashboard/groomy/assets/src/users/${usuarioPHP.imagen}`;
+      }
       this.usuario = usuarioPHP;
     }
   },
@@ -40,16 +44,28 @@ const App = defineComponent({
         formData.append('password', this.registro.password);
         formData.append('rol', 'user');
 
-        const res = await fetch('/dashboard/groomy/public/api/usuario.php', {
+        const res = await fetch('/dashboard/groomy/public/index.php', {
           method: 'POST',
           body: formData
         });
 
-        const text = await res.text();
-        this.mensaje = text;
-        alert(text);
+        const data = await res.json();
+
+        if (data.success) {
+          this.mensaje = data.mensaje;
+          this.tipoMensaje = 'exito';
+
+          setTimeout(() => {
+            location.reload();
+          }, 2200);
+        } else {
+          this.mensaje = data.mensaje || 'Error al registrar';
+          this.tipoMensaje = 'error';
+        }
       } catch (error) {
         console.error(error);
+        this.mensaje = 'Error de conexión con el servidor.';
+        this.tipoMensaje = 'error';
       }
     },
     login() {
@@ -66,12 +82,32 @@ const App = defineComponent({
         .then(res => res.json())
         .then(data => {
           if (data.success) {
-            location.reload();
+            this.tipoMensaje = 'exito';
+            this.mensaje = 'Inicio de sesión exitoso.';
+
+            setTimeout(() => {
+              location.reload();
+            }, 2200);
           } else {
-            alert(data.mensaje || 'Credenciales incorrectas');
+            this.tipoMensaje = 'error';
+            this.mensaje = data.mensaje || 'Credenciales incorrectas';
+
+
+            setTimeout(() => {
+              this.mensaje = '';
+              this.tipoMensaje = '';
+            }, 2200);
           }
         })
-        .catch(error => console.error('Error:', error));
+        .catch(error => {
+          console.error('Error:', error);
+          this.tipoMensaje = 'error';
+          this.mensaje = 'Error de conexión con el servidor';
+          setTimeout(() => {
+            this.mensaje = '';
+            this.tipoMensaje = '';
+          }, 2200);
+        });
     },
     cerrarSesion(){
       window.location.href = '../public/api/logout.php';

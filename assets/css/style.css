@@ -109,13 +109,6 @@ body {
     background-color: #690303;
 }
 
-.imagen-perfil {
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
-    object-fit: cover;
-}
-
 .icono-perfil {
     font-size: 24px;
     vertical-align: middle;
@@ -295,7 +288,6 @@ footer.footer img:hover {
     text-align: center;
 }
 
-/* Imagen de perfil */
 .modal-content-perfil img {
     border-radius: 50%;
     border: 3px solid #35bfb8;
@@ -304,6 +296,15 @@ footer.footer img:hover {
     object-fit: cover;
     margin-top: 10px;
     box-shadow: 0 0 10px rgba(53, 191, 184, 0.5);
+}
+.imagen-perfil {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    object-fit: cover;
+    vertical-align: middle;
+    transform: scale(1.4);
+    margin-right: -1px; 
 }
 
 /* Botón editar y cerrar */
@@ -527,3 +528,18 @@ footer.footer img:hover {
     background-color: #1e5756;
     transform: scale(1);
 }
+
+.mensaje-exito {
+    color: green;
+    font-weight: bold;
+    margin-top: 10px;
+    text-align: center;
+}
+
+.mensaje-error {
+    color: red;
+    font-weight: bold;
+    margin-top: 10px;
+    text-align: center;
+}
+
