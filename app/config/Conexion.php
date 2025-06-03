@@ -23,7 +23,11 @@ class Conexion {
             );
             $this->conexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         } catch (PDOException $e) {
-            die("Error de conexión: " . $e->getMessage());
+            echo json_encode([
+                'success' => false,
+                'mensaje' => 'Error de conexión a la base de datos: ' . $e->getMessage()
+            ]);
+            exit;
         } 
     }
 

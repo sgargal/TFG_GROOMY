@@ -3,7 +3,7 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 $usuario = $_SESSION['usuario'] ?? null;
-$rol = (is_array($usuario) && isset($usuario['rol'])) ? $usuario['rol'] : null;
+$rol = $usuario['rol'] ?? null;
 
 ?>
 <!DOCTYPE html>
@@ -31,7 +31,8 @@ $rol = (is_array($usuario) && isset($usuario['rol'])) ? $usuario['rol'] : null;
                     <?php if ($usuario): ?>
                         <?php if ($rol === 'admin'): ?>
                             <li>
-                                <button @click="mostrarPanelAdmin = true" class="boton-estandar">Panel Admin</button>
+                                <a href="../app/views/admin/panelAdmin.php" class="boton-estandar">
+                                    <i class="fa fa-user-shield"></i> Panel Admin </a>
                             </li>
                         <?php else: ?>
                             <li>
@@ -44,9 +45,11 @@ $rol = (is_array($usuario) && isset($usuario['rol'])) ? $usuario['rol'] : null;
                                     <?= htmlspecialchars($usuario['nombre']) ?>
                                 </button>
                             </li>
-                            <li><a href="../app/views/usuario/citas.php" class="boton-perfil"><i class="fa fa-calendar"></i>Citas</a></li>
-                            <li><button @click="mostrarCerrarSesion = true" class="boton-cerrar">Cerrar Sesión</button></li>
+                            <li><a href="../app/views/usuario/citas.php" class="boton-perfil"><i class="fa fa-calendar"></i> Citas</a></li>
                         <?php endif; ?>
+
+                        
+                        <li><button @click="mostrarCerrarSesion = true" class="boton-cerrar">Cerrar Sesión</button></li>
                     <?php else: ?>
                         <li><button @click="mostrarSign = true" class="boton-estandar">REGÍSTRATE</button></li>
                         <li><button @click="mostrarLogin = true" class="boton-estandar">INICIA SESIÓN</button></li>
@@ -68,7 +71,6 @@ $rol = (is_array($usuario) && isset($usuario['rol'])) ? $usuario['rol'] : null;
                         <input type="password" id="passwordRegistro" v-model="registro.password" required>
 
                         <p v-if="mensaje" :class="tipoMensaje === 'error' ? 'mensaje-error' : 'mensaje-exito'">{{ mensaje }}</p>
-
 
                         <button type="submit" class="boton-estandar">REGISTRAR</button>
                     </form>
