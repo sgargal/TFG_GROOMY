@@ -617,7 +617,208 @@ footer.footer img:hover {
     font-size: 18px;
 }
 
-
 .boton-copiar:hover {
     color: #00e1d2;
 }
+
+.formulario-barberia {
+    font-family: 'Monserrat', sans-serif;
+    max-width: 900px;
+    margin: 40px auto;
+    background-color: white;
+    padding: 40px;
+    border-radius: 16px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.formulario-barberia h1 {
+    text-align: center;
+    font-size: 2.2rem;
+    color: #39a9a7;
+    margin-bottom: 30px;
+}
+
+.formulario-barberia form label {
+    display: block;
+    font-size: 1rem;
+    color: #111;
+    margin: 12px 0 6px;
+    font-weight: 600;
+}
+
+.formulario-barberia form input[type="text"],
+.formulario-barberia form input[type="email"],
+.formulario-barberia form input[type="password"],
+.formulario-barberia form input[type="time"],
+.formulario-barberia form input[type="file"],
+.formulario-barberia form select {
+    width: 96%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 1rem;
+    background-color: #f4f4f4;
+    transition: border-color 0.3s ease;
+}
+
+.formulario-barberia form input:focus,
+.formulario-barberia form select:focus {
+    border-color: #39a9a7;
+    background-color: #e7f9f5;
+    outline: none;
+}
+
+.formulario-barberia .boton-estandar {
+    margin-top: 20px;
+    width: 100%;
+}
+
+
+.grupo-servicio {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    margin-bottom: 20px;
+}
+
+.grupo-servicio input[type="text"] {
+    flex: 3;
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    background-color: #e0f7f6;
+    font-size: 1rem;
+}
+
+.grupo-servicio input[type="number"] {
+    flex: 1;
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    background-color: #e0f7f6;
+    font-size: 1rem;
+}
+
+.grupo-empleado {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.grupo-empleado input[type="text"] {
+    flex: 2;
+    height: auto;
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    background-color: #e0f7f6;
+    font-size: 1rem;
+}
+
+.grupo-empleado input[type="file"] {
+    display: none;
+}
+
+.grupo-horario {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+  flex-wrap: nowrap;
+}
+
+.grupo-horario select,
+.grupo-horario input[type="time"] {
+  padding: 10px;
+  height: auto;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  background-color: #f4f4f4;
+  font-size: 1rem;
+  font-family: 'Monserrat', sans-serif;
+  width: auto;
+  flex: 1;
+  max-width: 180px;
+}
+
+.separador {
+  font-size: 18px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  height: 42px;
+  padding: 0 5px;
+}
+
+.grupo-redes {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.grupo-redes select {
+  flex: 1;
+  line-height: 1.2;
+}
+
+.grupo-redes input[type="text"] {
+  background-color: #c0e6e6;
+  border: none;
+  border-radius: 10px;
+  padding: 10px;
+  font-size: 1rem;
+  font-family: 'Monserrat', sans-serif;
+  height: 20px;
+  width: 100%;
+}
+
+.grupo-redes select {
+  flex: 1;
+}
+
+.grupo-redes input[type="text"] {
+  flex: 1;
+}
+
+.boton-add {
+    background-color: #39a9a7;
+    border: none;
+    border-radius: 50%;
+    color: white;
+    width: 35px;
+    height: 35px;
+    font-size: 16px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s ease;
+    padding: 0;
+    flex-shrink: 0;
+}
+
+.boton-add:hover {
+    background-color: #1f746f;
+}
+
+.boton-subir {
+    background-color: #39a9a7;
+    color: white;
+    padding: 8px 14px;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    height: auto;
+    font-family: 'Monserrat', sans-serif;
+    line-height: 1;
+}
+.boton-subir:hover {
+    background-color: #2aa29b;
+}
+
+

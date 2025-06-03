@@ -48,7 +48,7 @@ $rol = $usuario['rol'] ?? null;
                             <li><a href="../app/views/usuario/citas.php" class="boton-perfil"><i class="fa fa-calendar"></i> Citas</a></li>
                         <?php endif; ?>
 
-                        
+
                         <li><button @click="mostrarCerrarSesion = true" class="boton-cerrar">Cerrar Sesión</button></li>
                     <?php else: ?>
                         <li><button @click="mostrarSign = true" class="boton-estandar">REGÍSTRATE</button></li>
@@ -103,7 +103,16 @@ $rol = $usuario['rol'] ?? null;
                         <img :src="usuario.imagen" alt="Imagen de perfil" width="150">
                     </p>
                     <p v-else><strong>Imagen:</strong><br><br><img src="../assets/src/sinImagen.png"></p>
-                    <button type="submit" class="boton-estandar" onclick="window.location.href='../app/views/usuario/editarPerfil.php'"><i class="fa fa-user-edit"></i> Editar</button>
+                    <?php if ($rol === 'barberia'): ?>
+                        <button type="submit" class="boton-estandar" onclick="window.location.href='../app/views/barberia/editarPerfilBarber.php'">
+                            <i class="fa fa-user-edit"></i> Editar Perfil Barbería
+                        </button>
+                    <?php elseif ($rol === 'user'): ?>
+                        <button type="submit" class="boton-estandar" onclick="window.location.href='../app/views/usuario/editarPerfil.php'">
+                            <i class="fa fa-user-edit"></i> Editar Perfil Usuario
+                        </button>
+                    <?php endif; ?>
+
                     <button @click="cerrarPerfil">Cerrar</button>
                 </section>
             </section>
