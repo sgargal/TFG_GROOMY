@@ -20,9 +20,11 @@ createApp({
     },
     methods: {
         agregarServicio() {
+            console.log("Agregando servicio...");
             this.servicios.push({ nombre: '', precio: '' });
         },
         agregarEmpleado() {
+            console.log("Agregando empleado...");
             this.empleados.push({
                 nombre: '',
                 imagen: null
@@ -35,10 +37,21 @@ createApp({
             }
         },
         agregarHorario() {
+            console.log("Agregando horario...");
             this.horarios.push({ dia: '', inicio: '', fin: '' });
         },
         agregarRed() {
+            console.log("Agregando red social...");
             this.redesSociales.push({ tipo: '', url: '' });
         }
+    },
+    watch: {
+        servicios(val) {
+            console.log("Servicios actuales:", val);
+        },
+        empleados(val) {
+            console.log("Empleados actuales:", val);
+        }
     }
+
 }).mount('#formBarberia');
