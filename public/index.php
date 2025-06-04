@@ -1,14 +1,19 @@
 <?php
 session_start();
 require_once '../app/controllers/UsuarioController.php';
+require_once '../app/controllers/BarberiaController.php';
+
 
 use App\Controllers\UsuarioController;
-
+use App\Controllers\BarberiaController;
 
 $controller = new UsuarioController();
+$barberiaController = new BarberiaController();
+$barberias = $barberiaController->listarBarberias();
 ?>
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -16,6 +21,7 @@ $controller = new UsuarioController();
     <link rel="icon" href="../assets/src/logoGROOMY-fondosin.png">
     <link rel="stylesheet" href="../assets/css/style.css">
 </head>
+
 <body>
     <header>
         <?php
@@ -23,7 +29,16 @@ $controller = new UsuarioController();
         ?>
     </header>
     <main>
-        <h1>Bienvenido a GROOMY</h1>
+        <section class="contenedor-barberias">
+            <?php foreach ($barberias as $barberia): ?>
+                <div class="tarjeta-barberia">
+                    <img src="../assets/src/users/<?= htmlspecialchars($barberia['imagen']) ?>" alt="Logo" class="imagen-barberia">
+                    <h3><?= htmlspecialchars($barberia['nombre']) ?></h3>
+                    <p><i class="fa fa-map-marker-alt"></i> <?= htmlspecialchars($barberia['direccion'] ?? 'Sin dirección') ?></p>
+                    <a href="detalleBarberia.php?id=<?= $barberia['id'] ?>" class="boton-estandar">Ver más</a>
+                </div>
+            <?php endforeach; ?>
+        </section>
     </main>
     <footer>
         <?php
@@ -31,4 +46,5 @@ $controller = new UsuarioController();
         ?>
     </footer>
 </body>
+
 </html>

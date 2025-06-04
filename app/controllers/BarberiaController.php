@@ -108,4 +108,9 @@ class BarberiaController {
         header('Location: /dashboard/groomy/app/views/barberia/editarPerfilBarber.php');
         exit();
     }
+
+    public function listarBarberias() {
+        $modelo = new \App\Models\Barberia();
+        return $modelo->obtenerBarberias();
+    }
 }
