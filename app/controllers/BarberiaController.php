@@ -63,7 +63,7 @@ class BarberiaController {
         $img = $_FILES['img'] ?? null;
         if($img && $img['error'] === UPLOAD_ERR_OK) {
             $nombreImg = uniqid() . '-' . basename($img['name']);
-            $rutaDestino = __DIR__ . '/../../assets/src/barbers/' . $nombreImg;
+            $rutaDestino = __DIR__ . '/../../assets/src/users/' . $nombreImg;
             
             if(!move_uploaded_file($img['tmp_name'], $rutaDestino)) {
                 echo json_encode(['error' => 'Error al subir la imagen']);

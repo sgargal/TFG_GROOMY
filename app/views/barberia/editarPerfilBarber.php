@@ -42,10 +42,10 @@ $usuario = $_SESSION['usuario'] ?? null;
             <input type="hidden" name="redesSociales" :value="JSON.stringify(redesSociales)">
 
                 <label for="nombre">NOMBRE</label>
-                <input type="text" id="nombre" name="nombre" value="<?= htmlspecialchars($usuario['nombre']) ?>" required>
+                <input type="text" id="nombre" name="nombre" value="<?= htmlspecialchars($usuario['nombre']) ?>">
 
                 <label for="email">EMAIL</label>
-                <input type="email" id="email" name="email" value="<?= htmlspecialchars($usuario['email']) ?>" required>
+                <input type="email" id="email" name="email" value="<?= htmlspecialchars($usuario['email']) ?>">
 
                 <label for="img">IMAGEN ACTUAL:</label><br>
                 <?php if (!empty($usuario['imagen'])): ?>
@@ -65,14 +65,14 @@ $usuario = $_SESSION['usuario'] ?? null;
 
                 <label>SERVICIOS + PRECIOS</label>
                 <div v-for="(servicio, index) in servicios" :key="index" class="grupo-servicio">
-                    <input type="text" v-model="servicio.nombre" placeholder="Nombre del servicio" required>
-                    <input type="number" v-model="servicio.precio" placeholder="€" min="0" step="0.01" required>
+                    <input type="text" v-model="servicio.nombre" placeholder="Nombre del servicio">
+                    <input type="number" v-model="servicio.precio" placeholder="€" min="0" step="0.01" >
                     <button type="button" class="boton-add" @click="agregarServicio"><i class="fa fa-plus"></i></button>
                 </div>
 
                 <label>EMPLEADOS</label>
                 <div v-for="(empleado, index) in empleados" :key="index" class="grupo-empleado">
-                    <input type="text" v-model="empleado.nombre" placeholder="Nombre del empleado" required>
+                    <input type="text" v-model="empleado.nombre" placeholder="Nombre del empleado">
 
                     <label class="boton-subir">
                         <i class="fa fa-upload"></i> Subir Imagen
@@ -84,7 +84,7 @@ $usuario = $_SESSION['usuario'] ?? null;
 
                 <label>HORARIOS</label>
                 <div v-for="(horario, index) in horarios" :key="index" class="grupo-horario">
-                    <select v-model="horario.dia" required>
+                    <select v-model="horario.dia">
                         <option disabled value="">Selecciona un día</option>
                         <option>Lunes</option>
                         <option>Martes</option>
@@ -95,22 +95,22 @@ $usuario = $_SESSION['usuario'] ?? null;
                         <option>Domingo</option>
 
                     </select>
-                    <input type="time" v-model="horario.inicio" required>
+                    <input type="time" v-model="horario.inicio" >
                     <span class="separador">-</span>
-                    <input type="time" v-model="horario.fin" required>
+                    <input type="time" v-model="horario.fin">
                     <button type="button" class="boton-add" @click="agregarHorario"><i class="fa fa-plus"></i></button>
                 </div>
 
                 <label>REDES SOCIALES</label>
                 <div v-for="(red,index) in redesSociales" :key="index" class="grupo-redes">
-                    <select v-model="red.tipo" required>
+                    <select v-model="red.tipo">
                         <option disabled value="">Selecciona una red social</option>
                         <option>Facebook</option>
                         <option>Instagram</option>
                         <option>X</option>
                     </select>
 
-                    <input type="text" v-model="red.url" placeholder="URL de la red social" required>
+                    <input type="text" v-model="red.url" placeholder="URL de la red social">
 
                     <button type="button" class="boton-add" @click="agregarRed"><i class="fa fa-plus"></i></button>
                 </div>
