@@ -35,7 +35,7 @@ $barberias = $barberiaController->listarBarberias();
                     <img src="../assets/src/users/<?= htmlspecialchars($barberia['imagen']) ?>" alt="Logo" class="imagen-barberia">
                     <h3><?= htmlspecialchars($barberia['nombre']) ?></h3>
                     <p><i class="fa fa-map-marker-alt"></i> <?= htmlspecialchars($barberia['direccion'] ?? 'Sin dirección') ?></p>
-                    <a href="detalleBarberia.php?id=<?= $barberia['id'] ?>" class="boton-estandar">Ver más</a>
+                    <a href="../app/views/barberia/detalleBarberia.php?id=<?= $barberia['id'] ?>" class="boton-estandar">Ver más</a>
                 </div>
             <?php endforeach; ?>
         </section>

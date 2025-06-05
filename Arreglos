@@ -2,3 +2,6 @@ Arreglos
 - Los mensajes(actualizar perfil solo, lo demas hecho)
 - En firefox no carga el icono del logo
 - Arreglar estilos editarPerfilAdmin
+- Arreglar mensajes de registrarBarberia desde Admin
+- En editarPerfilBarber.php si un barbero tiene foto cargarla
+- En el modal de registro añadir enlace al modal de iniciar sesion
