@@ -16,6 +16,9 @@ if (!$barberia) {
     echo "Barbería no encontrada.";
     exit;
 }
+$servicios = $barberiaModel->obtenerServicios($barberia['id']);
+$empleados = $barberiaModel->obtenerEmpleados($barberia['id']);
+$redes = $barberiaModel->obtenerRedes($barberia['id']);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -44,6 +47,66 @@ if (!$barberia) {
         <section class="header-barberia">
             <img src="../../../assets/src/users/<?= htmlspecialchars($barberia['imagen']) ?>" alt="Logo de la barbería" class="logo-barberia">
             <h1><?= htmlspecialchars($barberia['nombre']) ?></h1>
+        </section>
+        <section class="tabs-barberia">
+            <button id="tab-servicios" class="tab active">SERVICIOS</button>
+            <span class="separador"> | </span>
+            <button id="tab-info" class="tab">INFORMACIÓN</button>
+        </section>
+
+        <!-- contenido de ambas secciones -->
+        <!-- seccion servicios -->
+        <section id="panel-servicios" class="panel-tab">
+            <ul class="lista-servicios">
+                <?php foreach ($servicios as $servicio): ?>
+                    <li class="servicio-item">
+                        <span class="nombre-servicio"><?= htmlspecialchars($servicio['nombre']) ?></span>
+                        <span class="precio-servicio"><?= htmlspecialchars($servicio['precio']) ?> €</span>
+                    </li>
+                <?php endforeach; ?>
+            </ul>
+            <h3>REDES SOCIALES</h3>
+            <section class="redes-sociales">
+                <?php foreach ($redes as $red): ?>
+                    <a href="<?= htmlspecialchars($red['url']) ?>" target="_blank">
+                        <?= htmlspecialchars($red['nombre_red_social']) ?>
+                    </a>
+                <?php endforeach; ?>
+            </section>
+        </section>
+
+        <!-- seccion informacion -->
+        <section id="panel-info" class="panel-tab oculto">
+            <article class="mapa-barberia">
+                <iframe
+                    src="https://www.google.com/maps?q=<?= urlencode($barberia['direccion']) ?>&output=embed"
+                    width="100%" height="300" style="border:0;" allowfullscreen loading="lazy">
+                </iframe>
+            </article>
+
+            <h3>CONOCE A NUESTROS EMPLEADOS</h3>
+            <ul class="empleados">
+                <?php foreach ($empleados as $empleado): ?>
+                    <li class="empleado">
+                        <img src="../../../assets/src/barberos/<?= htmlspecialchars($empleado['imagen']) ?>" alt="Foto de barbero">
+                        <p><?= htmlspecialchars($empleado['nombre']) ?></p>
+                    </li>
+                <?php endforeach; ?>
+            </ul>
+
+            <h3>SOBRE NOSOTROS</h3>
+            <p class="descripcion-barberia">
+                <?= htmlspecialchars($barberia['informacion'] ?? '') ?>
+            </p>
+
+            <h3>REDES SOCIALES</h3>
+            <section class="redes-sociales">
+                <?php foreach ($redes as $red): ?>
+                    <a href="<?= htmlspecialchars($red['url']) ?>" target="_blank">
+                        <?= htmlspecialchars($red['nombre_red_social']) ?>
+                    </a>
+                <?php endforeach; ?>
+            </section>
         </section>
     </main>
     <footer class="footer">
