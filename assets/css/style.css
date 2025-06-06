@@ -1073,6 +1073,36 @@ footer.footer img:hover {
   transform: scale(1.1);
 }
 
+.lista-horarios {
+  list-style: none;
+  padding: 0;
+  margin: 20px 0 40px;
+  font-family: 'Montserrat', sans-serif;
+  color: #333;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.lista-horarios li {
+  background-color: #e0f7f6;
+  padding: 12px 18px;
+  border-left: 5px solid #39a9a7;
+  border-radius: 10px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+  transition: background-color 0.3s ease;
+}
+
+.lista-horarios li:hover {
+  background-color: #d0efef;
+}
+
+.lista-horarios strong {
+  color: #39a9a7;
+  font-weight: 600;
+  margin-right: 10px;
+}
+
 
 
 

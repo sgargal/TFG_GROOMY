@@ -19,6 +19,8 @@ if (!$barberia) {
 $servicios = $barberiaModel->obtenerServicios($barberia['id']);
 $empleados = $barberiaModel->obtenerEmpleados($barberia['id']);
 $redes = $barberiaModel->obtenerRedes($barberia['id']);
+$horarios = $barberiaModel->obtenerHorarios($barberia['id']);
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -70,55 +72,64 @@ $redes = $barberiaModel->obtenerRedes($barberia['id']);
                         </li>
                     <?php endforeach; ?>
                 </ul>
+                <h3>HORARIO</h3>
+                <ul class="lista-horarios">
+                    <?php foreach ($horarios as $horario): ?>
+                        <li>
+                            <strong><?= htmlspecialchars($horario['dia']) ?>:</strong>
+                            <?= htmlspecialchars($horario['inicio']) ?> - <?= htmlspecialchars($horario['fin']) ?>
+                        </li>
+                    <?php endforeach; ?>
+                </ul>
             </section>
 
-                <!-- seccion informacion -->
-                <section id="panel-info" class="panel-tab" v-if="vistaActiva === 'informacion'">
-                    <article class="mapa-barberia">
-                        <iframe
-                            src="https://www.google.com/maps?q=<?= urlencode($barberia['direccion']) ?>&output=embed"
-                            width="100%" height="300" style="border:0;" allowfullscreen loading="lazy">
-                        </iframe>
-                    </article>
+            <!-- seccion informacion -->
+            <section id="panel-info" class="panel-tab" v-if="vistaActiva === 'informacion'">
+                <article class="mapa-barberia">
+                    <iframe
+                        src="https://www.google.com/maps?q=<?= urlencode($barberia['direccion']) ?>&output=embed"
+                        width="100%" height="300" style="border:0;" allowfullscreen loading="lazy">
+                    </iframe>
+                </article>
 
-                    <h3>CONOCE A NUESTROS EMPLEADOS</h3>
-                    <ul class="empleados">
-                        <?php foreach ($empleados as $empleado): ?>
-                            <li class="empleado">
-                                <img src="../../../<?= htmlspecialchars($empleado['imagen']) ?>" alt="Foto de barbero">
-                                <p><?= htmlspecialchars($empleado['nombre']) ?></p>
-                            </li>
-                        <?php endforeach; ?>
-                    </ul>
+                <h3>CONOCE A NUESTROS EMPLEADOS</h3>
+                <ul class="empleados">
+                    <?php foreach ($empleados as $empleado): ?>
+                        <li class="empleado">
+                            <img src="../../../<?= htmlspecialchars($empleado['imagen']) ?>" alt="Foto de barbero">
+                            <p><?= htmlspecialchars($empleado['nombre']) ?></p>
+                        </li>
+                    <?php endforeach; ?>
+                </ul>
 
-                    <h3>SOBRE NOSOTROS</h3>
-                    <p class="descripcion-barberia">
-                        <?= htmlspecialchars($barberia['informacion'] ?? '') ?>
-                    </p>
+                <h3>SOBRE NOSOTROS</h3>
+                <p class="descripcion-barberia">
+                    <?= htmlspecialchars($barberia['informacion'] ?? '') ?>
+                </p>
 
-                    <h3>REDES SOCIALES</h3>
-                    <section class="redes-sociales">
-                        <?php foreach ($redes as $red): ?>
-                            <?php
-                            $nombre = strtolower($red['tipo']);
-                            $icono = '';
+                <h3>REDES SOCIALES</h3>
+                <section class="redes-sociales">
+                    <?php foreach ($redes as $red): ?>
+                        <?php
+                        $nombre = strtolower($red['tipo']);
+                        $icono = '';
 
-                            if ($nombre === 'instagram') {
-                                $icono = 'logoInsta.png';
-                            } elseif ($nombre === 'facebook') {
-                                $icono = 'logoFacebook.png';
-                            } elseif ($nombre === 'x') {
-                                $icono = 'logoX.png';
-                            }
-                            ?>
-                            <?php if ($icono): ?>
-                                <a href="<?= htmlspecialchars($red['url']) ?>" target="_blank" class="icono-red">
-                                    <img src="../../../assets/src/<?= $icono ?>" alt="<?= htmlspecialchars($red['tipo']) ?>">
-                                </a>
-                            <?php endif; ?>
-                        <?php endforeach; ?>
-                    </section>
+                        if ($nombre === 'instagram') {
+                            $icono = 'logoInsta.png';
+                        } elseif ($nombre === 'facebook') {
+                            $icono = 'logoFacebook.png';
+                        } elseif ($nombre === 'x') {
+                            $icono = 'logoX.png';
+                        }
+                        ?>
+                        <?php if ($icono): ?>
+                            <a href="<?= htmlspecialchars($red['url']) ?>" target="_blank" class="icono-red">
+                                <img src="../../../assets/src/<?= $icono ?>" alt="<?= htmlspecialchars($red['tipo']) ?>">
+                            </a>
+                        <?php endif; ?>
+                    <?php endforeach; ?>
                 </section>
+            </section>
 
     </main>
     <footer class="footer">
@@ -135,7 +146,9 @@ $redes = $barberiaModel->obtenerRedes($barberia['id']);
         </nav>
     </footer>
     <script>
-        const { createApp } = Vue;
+        const {
+            createApp
+        } = Vue;
 
         createApp({
             data() {
