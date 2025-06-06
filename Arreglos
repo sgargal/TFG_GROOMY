@@ -5,3 +5,8 @@ Arreglos
 - Arreglar mensajes de registrarBarberia desde Admin
 - En editarPerfilBarber.php si un barbero tiene foto cargarla
 - En el modal de registro añadir enlace al modal de iniciar sesion
+- La primera vez que una barberia inicia sesion, le salte un aviso de que rellene todo
+- Añadir info de los barberos
+- MEJORAS A FUTURO: 
+    - chat
+    - Guardar favoritos
