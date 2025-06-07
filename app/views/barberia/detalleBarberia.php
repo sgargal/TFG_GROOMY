@@ -1,4 +1,10 @@
 <?php
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
+$usuario = $_SESSION['usuario'] ?? null;
+
 require_once __DIR__ . '/../../models/Barberia.php';
 
 use App\Models\Barberia;
@@ -36,6 +42,10 @@ $horarios = $barberiaModel->obtenerHorarios($barberia['id']);
 </head>
 
 <body>
+    <script>
+        window.usuarioPHP = <?= json_encode($usuario ?? null) ?>;
+    </script>
+
     <header class="header-inicio">
         <nav>
             <img src="../../../assets/src/logoGROOMY-fondoNegro.png" alt="Logo GROOMY" height="150" width="150">
@@ -66,7 +76,7 @@ $horarios = $barberiaModel->obtenerHorarios($barberia['id']);
             <section id="panel-servicios" class="panel-tab" v-if="vistaActiva === 'servicios'">
                 <ul class="lista-servicios">
                     <?php foreach ($servicios as $servicio): ?>
-                        <li class="servicio-item">
+                        <li class="servicio-item" @click="seleccionarServicio('<?= $servicio['nombre'] ?>')">
                             <span class="nombre-servicio"><?= htmlspecialchars($servicio['nombre']) ?></span>
                             <span class="precio-servicio"><?= htmlspecialchars($servicio['precio']) ?> €</span>
                         </li>
@@ -131,6 +141,22 @@ $horarios = $barberiaModel->obtenerHorarios($barberia['id']);
                 </section>
             </section>
 
+            <div v-if="mostrarModalLogin" class="modal-overlay">
+                <div class="modal-box">
+                    <p>Para reservar una cita necesitas iniciar sesión</p>
+                    <button @click="cerrarModal">Cerrar</button>
+                    <button @click="irAlInicio">Iniciar sesión</button>
+                </div>
+            </div>
+
+            <div v-if="mostrarModalConfirmar" class="modal-overlay">
+                <div class="modal-box">
+                    <p>¿Quires reservar una cita para "{{ servicioSeleccionado }}"?</p>
+                    <button @click="reservarAhora">Si, reservar</button>
+                    <button @click="cerrarModal">Más tarde</button>
+                </div>
+            </div>
+
     </main>
     <footer class="footer">
         <nav>
@@ -145,20 +171,8 @@ $horarios = $barberiaModel->obtenerHorarios($barberia['id']);
             </ul>
         </nav>
     </footer>
-    <script>
-        const {
-            createApp
-        } = Vue;
 
-        createApp({
-            data() {
-                return {
-                    vistaActiva: 'servicios' // por defecto
-                }
-            }
-        }).mount('#appDetalleBarberia');
-    </script>
-
+    <script src="../../../public/js/detalleBarber.js"></script>
 </body>
 
 </html>
