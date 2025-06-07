@@ -973,6 +973,20 @@ footer.footer img:hover {
   transform: scale(1.02);
 }
 
+.servicio-link {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  text-decoration: none;
+  color: inherit;
+  width: 100%;
+}
+
+.servicio-link:hover {
+  text-decoration: underline;
+}
+
+
 .nombre-servicio {
   font-weight: 600;
   color: #111;
@@ -1152,6 +1166,247 @@ footer.footer img:hover {
   transform: scale(1.05);
   opacity: 0.95;
 }
+
+.reserva-layout {
+  display: flex;
+  gap: 40px;
+  padding: 40px;
+  justify-content: center;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+
+/* Columnas izquierda y derecha */
+.columna-izquierda,
+.columna-derecha {
+  flex: 1;
+  min-width: 300px;
+  max-width: 500px;
+  padding: 30px;
+  border-radius: 16px;
+}
+
+/* Títulos dentro de las secciones */
+.reserva-bloque h3 {
+  font-family: 'Montserrat', sans-serif;
+  margin-bottom: 10px;
+  color: #0b2b28;
+  font-size: 1.3rem;
+}
+
+.calendario-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 8px;
+  max-width: 350px;
+  margin: 10px auto;
+  text-align: center;
+}
+
+.dia {
+  background-color: #e0f7f6;
+  padding: 10px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-weight: bold;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.dia:hover {
+  background-color: #00a89d;
+  color: white;
+}
+
+.dia.seleccionado {
+  background-color: #00a89d;
+  color: white;
+}
+
+.titulo-dia {
+  font-weight: bold;
+  font-family: 'Montserrat', sans-serif;
+}
+
+/* Contenedor de las horas */
+#horas-disponibles {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 10px;
+}
+
+
+.boton-reserva {
+  padding: 10px 15px;
+  background-color: #e0f7f6;
+  border: 2px solid #39a9a7;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: bold;
+  color: #111;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  font-family: 'Monserrat', sans-serif;
+}
+
+.boton-reserva:hover {
+  background-color: #00bfa6;
+  color: white;
+}
+
+/* Cuando una hora está seleccionada */
+.boton-reserva.seleccionada {
+  background-color: #00bfa6;
+  color: white;
+  border-color: #007e72;
+}
+
+.grupo-empleados {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+.empleado-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 12px;
+  background-color: #e0f7f6;
+  border: 2px solid #39a9a7;
+  border-radius: 12px;
+  width: 120px;
+  cursor: pointer;
+  transition: transform 0.2s ease, background-color 0.3s ease;
+  font-family: 'Monserrat', sans-serif;
+}
+
+.empleado-item:hover {
+  transform: scale(1.05);
+}
+
+.empleado-item img {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 8px;
+  box-shadow: 0 0 6px rgba(0,0,0,0.1);
+}
+
+.empleado-item span {
+  font-weight: bold;
+  color: #111;
+}
+
+/* Cuando se selecciona */
+input[name="id_barbero"]:checked + .empleado-item,
+.empleado-item.seleccionado {
+  background-color: #39a9a7;
+  color: white;
+  border-color: #467e7c;
+}
+
+input[name="id_barbero"]:checked + .empleado-item span {
+  color: white;
+}
+
+.reserva-bloque select {
+  background-color: #e0f7f6;
+  border: none;
+  border-radius: 12px;
+  padding: 10px 14px;
+  font-size: 1rem;
+  font-family: 'Montserrat', sans-serif;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  cursor: pointer;
+  width: 100%;
+  max-width: 450px;
+}
+
+.reserva-bloque select:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px #00bfa6;
+}
+
+.grupo-metodos {
+  display: flex;
+  gap: 20px;
+  justify-content: left;
+  margin-top: 10px;
+}
+
+.metodo-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #dff6f5;
+  padding: 15px;
+  border-radius: 15px;
+  width: 140px;
+  cursor: pointer;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  transition: transform 0.2s ease, background-color 0.2s ease;
+  border: 2px solid transparent;
+  text-align: center;
+}
+
+.metodo-item:hover {
+  transform: scale(1.05);
+}
+
+.metodo-item i {
+  font-size: 40px;
+  margin-bottom: 8px;
+  color: #467e7c;
+  transition: color 0.2s;
+}
+
+input[type="radio"]:checked + label.metodo-item i {
+  color: white;
+}
+
+.metodo-item span {
+  font-weight: bold;
+  font-size: 1rem;
+  font-family: 'Montserrat', sans-serif;
+}
+
+input[type="radio"]:checked + label.metodo-item {
+  background-color: #39a9a7;
+  color: white;
+  border-color: #467e7c;
+}
+
+input[type="radio"]:checked + label.metodo-item span {
+  color: white;
+}
+
+.boton-Reservar {
+  font-family: 'Montserrat', sans-serif;
+  margin-top: 30px; /* ajusta la separación */
+  background-color: #39a9a7;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 10px;
+  color: white;
+  font-weight: bold;
+  font-size: 1rem;
+  cursor: pointer;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  transition: background-color 0.3s;
+}
+
+.boton-Reservar:hover {
+  background-color: #467e7c;
+}
+
+
+
 
 
 

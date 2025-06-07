@@ -56,6 +56,9 @@ $horarios = $barberiaModel->obtenerHorarios($barberia['id']);
             </ul>
         </nav>
     </header>
+    <script>
+        window.idBarberia = <?= $barberia['id'] ?>;
+    </script>
     <main id="appDetalleBarberia">
         <section class="detalle-barberia">
             <section class="header-barberia">
@@ -76,9 +79,11 @@ $horarios = $barberiaModel->obtenerHorarios($barberia['id']);
             <section id="panel-servicios" class="panel-tab" v-if="vistaActiva === 'servicios'">
                 <ul class="lista-servicios">
                     <?php foreach ($servicios as $servicio): ?>
-                        <li class="servicio-item" @click="seleccionarServicio('<?= $servicio['nombre'] ?>')">
-                            <span class="nombre-servicio"><?= htmlspecialchars($servicio['nombre']) ?></span>
-                            <span class="precio-servicio"><?= htmlspecialchars($servicio['precio']) ?> €</span>
+                        <li class="servicio-item">
+                            <a href="../barberia/reservar.php?id=<?= $barberia['id'] ?>&servicio=<?= $servicio['id'] ?>" class="servicio-link">
+                                <span class="nombre-servicio"><?= htmlspecialchars($servicio['nombre']) ?></span>
+                                <span class="precio-servicio"><?= htmlspecialchars($servicio['precio']) ?> €</span>
+                            </a>
                         </li>
                     <?php endforeach; ?>
                 </ul>

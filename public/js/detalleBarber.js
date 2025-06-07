@@ -6,7 +6,8 @@ createApp({
             vistaActiva: 'servicios',
             servicioSeleccionado: null,
             mostrarModalLogin: false,
-            mostrarModalConfirmar: false
+            mostrarModalConfirmar: false,
+            idBarberia: window.idBarberia
         }
     },
     methods: {
@@ -19,7 +20,7 @@ createApp({
             }
         },
         reservarAhora() {
-            window.location.href = 'reservar.php';
+            window.location.href = `reservar.php?id=${this.idBarberia}`;
         },
         cerrarModal() {
             this.mostrarModalLogin = false;

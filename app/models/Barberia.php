@@ -201,14 +201,14 @@ class Barberia
 
     public function obtenerServicios($barberiaId)
     {
-        $stmt = $this->db->prepare("SELECT nombre, precio FROM servicio WHERE id_barberia = :id");
+        $stmt = $this->db->prepare("SELECT id, nombre, precio FROM servicio WHERE id_barberia = :id");
         $stmt->execute([':id' => $barberiaId]);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
     public function obtenerEmpleados($barberiaId)
     {
-        $stmt = $this->db->prepare("SELECT nombre, imagen FROM barbero WHERE id_barberia = :id");
+        $stmt = $this->db->prepare("SELECT id, nombre, imagen FROM barbero WHERE id_barberia = :id");
         $stmt->execute([':id' => $barberiaId]);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
