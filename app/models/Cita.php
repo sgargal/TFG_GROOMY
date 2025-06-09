@@ -67,11 +67,52 @@ class Cita {
 
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+    public function obtenerCitasPorBarberia($barberiaId, $fecha, $barberoId = null)
+    {
+        $sql = "SELECT 
+                c.*, 
+                u.nombre AS cliente, 
+                s.nombre AS servicio, 
+                b.nombre AS barbero
+            FROM cita c
+            JOIN usuarios u ON c.id_usuario = u.id
+            JOIN servicio s ON c.id_servicio = s.id
+            LEFT JOIN barbero b ON c.id_barbero = b.id
+            WHERE c.id_barberia = :barberiaId
+              AND DATE(c.fecha_hora) = :fecha";
 
+        if ($barberoId) {
+            $sql .= " AND c.id_barbero = :barberoId";
+        }
 
+        $sql .= " ORDER BY c.fecha_hora ASC";
 
+        $stmt = $this->db->prepare($sql);
 
+        $params = [
+            ':barberiaId' => $barberiaId,
+            ':fecha' => $fecha
+        ];
 
+        if ($barberoId) {
+            $params[':barberoId'] = $barberoId;
+        }
+
+        $stmt->execute($params);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+    public function obtenerBarberosPorBarberia($barberiaId)
+    {
+        $stmt = $this->db->prepare("SELECT id, nombre FROM barbero WHERE id_barberia = :id");
+        $stmt->execute([':id' => $barberiaId]);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+    public function obtenerIdBarberiaPorUsuario($usuarioId)
+    {
+        $stmt = $this->db->prepare("SELECT id FROM barberia WHERE usuario_id = :usuario_id");
+        $stmt->execute([':usuario_id' => $usuarioId]);
+        return $stmt->fetchColumn();
+    }
 
 }
 

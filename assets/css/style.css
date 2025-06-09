@@ -1417,11 +1417,31 @@ input[type="radio"]:checked + label.metodo-item span {
 }
 
 .cita-item {
-  background-color: #f1f1f1;
+  background-color: #f9f9f9;
   border-left: 6px solid #39a9a7;
-  padding: 15px;
-  border-radius: 12px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  padding: 25px 30px;
+  border-radius: 16px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  font-family: 'Monserrat', sans-serif;
+  max-width: 700px;
+  margin: 0 auto;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.cita-item:hover {
+  transform: scale(1.02);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.2);
+}
+
+.cita-item p {
+  margin: 10px 0;
+  font-size: 1rem;
+  color: #222;
+}
+
+.cita-item strong {
+  color: #111;
+  font-weight: 700;
 }
 
 .cita-pendiente {
@@ -1464,6 +1484,20 @@ input[type="radio"]:checked + label.metodo-item span {
   border-color: #1f746f;
 }
 
+.filtros-citas-barberia {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  margin: 20px auto;
+  justify-content: center;
+  align-items: center;
+}
+
+.filtros-citas-barberia label,
+.filtros-citas-barberia input,
+.filtros-citas-barberia select {
+  font-size: 1rem;
+}
 
 
 

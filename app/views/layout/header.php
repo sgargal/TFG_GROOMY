@@ -45,7 +45,11 @@ $rol = $usuario['rol'] ?? null;
                                     <?= htmlspecialchars($usuario['nombre']) ?>
                                 </button>
                             </li>
-                            <li><a href="../app/views/usuario/citas.php?estado=pendiente" class="boton-perfil"><i class="fa fa-calendar"></i> Citas</a></li>
+                            <?php if ($rol === 'barberia'): ?>
+                                <li><a href="../app/views/barberia/citasBarber.php" class="boton-perfil"><i class="fa fa-calendar"></i> Citas</a></li>
+                            <?php elseif ($rol === 'user'): ?>
+                                <li><a href="../app/views/usuario/citas.php?estado=pendiente" class="boton-perfil"><i class="fa fa-calendar"></i> Citas</a></li>
+                            <?php endif; ?>
                         <?php endif; ?>
 
 
