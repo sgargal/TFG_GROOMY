@@ -1405,6 +1405,26 @@ input[type="radio"]:checked + label.metodo-item span {
   background-color: #467e7c;
 }
 
+.citas-usuario {
+    padding: 30px;
+    font-family: 'Monserrat', sans-serif;
+}
+
+.lista-citas {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.cita-item {
+    background-color: #f1f1f1;
+    border-left: 6px solid #39a9a7;
+    padding: 15px;
+    border-radius: 12px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+
 
 
 

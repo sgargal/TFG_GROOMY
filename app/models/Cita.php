@@ -44,18 +44,23 @@ class Cita {
         return array_column($stmt->fetchAll(PDO::FETCH_ASSOC), 'hora');
     }
 
-    public function obtenerCitasPorUsuario($idUsuario) {
+    public function obtenerCitasPorUsuario($idUsuario)
+    {
         $stmt = $this->db->prepare("
             SELECT c.id, c.metodo_pago, c.estado, c.fecha_hora,
-                    b.nombre AS barberia,
-                    s.nombre AS servicio,
-                    e.nombre AS barbero,
+                u.nombre AS barberia,
+                s.nombre AS servicio,
+                e.nombre AS barbero
             FROM cita c
             JOIN barberia b ON c.id_barberia = b.id
+            JOIN usuarios u ON b.usuario_id = u.id
             JOIN servicio s ON c.id_servicio = s.id
-            JOIN barbero e ON  c.id_barbero = e.id
+            LEFT JOIN barbero e ON c.id_barbero = e.id
             WHERE c.id_usuario = :id
-            ORDER BY c.fecha_hora DESC");
+            ORDER BY c.fecha_hora DESC
+        ");
+
+
         $stmt->execute([':id' => $idUsuario]);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }

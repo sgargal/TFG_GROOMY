@@ -45,7 +45,7 @@ $servicioSeleccionado = isset($_GET['servicio']) ? (int)$_GET['servicio'] : null
         <nav>
             <img src="../../../assets/src/logoGROOMY-fondoNegro.png" alt="Logo GROOMY" height="150" width="150">
             <ul>
-                <li><a href="citas.php" class="boton-estandar"><i class="fas fa-calendar"></i>Citas</a></li>
+                <li><a href="../usuario/citas.php" class="boton-estandar"><i class="fas fa-calendar"></i>Citas</a></li>
                 <li>
                     <a href="../../../public/index.php" class="boton-estandar"><i class="fa fa-arrow-left"></i>Abandonar proceso</a>
                 </li>

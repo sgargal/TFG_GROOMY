@@ -1,7 +1,21 @@
 <?php
-if(session_status() === PHP_SESSION_NONE){
+if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
+
+require_once __DIR__ . '/../../models/Cita.php';
+
+use App\Models\Cita;
+
+$usuario = $_SESSION['usuario'] ?? null;
+
+if (!$usuario) {
+    echo "Debes iniciar sesión para ver tus citas.";
+    exit;
+}
+
+$citaModel = new Cita();
+$citas = $citaModel->obtenerCitasPorUsuario($usuario['id']);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -25,7 +39,26 @@ if(session_status() === PHP_SESSION_NONE){
         </nav>
     </header>
     <main>
+        <section class="citas-usuario">
+            <h2>Tus citas</h2>
 
+            <?php if(empty($citas)): ?>
+                <p>No tienes ninguna cita pendiente.</p>
+            <?php else: ?>
+                <div class="lista-citas">
+                    <?php foreach ($citas as $cita): ?>
+                        <div class="cita-item">
+                            <p><strong>Barbería:</strong> <?= htmlspecialchars($cita['barberia']) ?></p>
+                            <p><strong>Servicio:</strong> <?= htmlspecialchars($cita['servicio']) ?></p>
+                            <p><strong>Barbero:</strong> <?= $cita['barbero'] ?? 'Cualquiera' ?></p>
+                            <p><strong>Fecha:</strong> <?= date('d/m/Y', strtotime($cita['fecha_hora'])) ?></p>
+                            <p><strong>Hora:</strong> <?= date('H:i', strtotime($cita['fecha_hora'])) ?></p>
+                            <p><strong>Método de pago:</strong> <?= htmlspecialchars($cita['metodo_pago']) ?></p>
+                        </div>
+                    <?php endforeach; ?>
+                </div>
+            <?php endif; ?>
+        </section>
     </main>
     <footer class="footer">
         <nav>
