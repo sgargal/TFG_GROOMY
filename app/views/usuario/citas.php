@@ -15,10 +15,12 @@ if (!$usuario) {
 }
 
 $citaModel = new Cita();
-$citas = $citaModel->obtenerCitasPorUsuario($usuario['id']);
+$estado = $_GET['estado'] ?? 'pendientes';
+$citas = $citaModel->obtenerCitasPorUsuario($usuario['id'], $estado);
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -27,6 +29,7 @@ $citas = $citaModel->obtenerCitasPorUsuario($usuario['id']);
     <link rel="stylesheet" href="../../../assets/css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 </head>
+
 <body>
     <header class="header-inicio">
         <nav>
@@ -41,13 +44,16 @@ $citas = $citaModel->obtenerCitasPorUsuario($usuario['id']);
     <main>
         <section class="citas-usuario">
             <h2>Tus citas</h2>
-
-            <?php if(empty($citas)): ?>
+            <div class="botones-citas" style="margin-bottom: 20px;">
+                <a href="?estado=pendiente" class="boton-estado <?= $estado === 'pendiente' ? 'activo' : '' ?>">Pendientes</a>
+                <a href="?estado=realizada" class="boton-estado <?= $estado === 'realizada' ? 'activo' : '' ?>">Realizadas</a>
+            </div>
+            <?php if (empty($citas)): ?>
                 <p>No tienes ninguna cita pendiente.</p>
             <?php else: ?>
                 <div class="lista-citas">
                     <?php foreach ($citas as $cita): ?>
-                        <div class="cita-item">
+                        <div class="cita-item <?= $cita['estado'] === 'pendiente' ? 'cita-pendiente' : 'cita-realizada' ?>">
                             <p><strong>Barbería:</strong> <?= htmlspecialchars($cita['barberia']) ?></p>
                             <p><strong>Servicio:</strong> <?= htmlspecialchars($cita['servicio']) ?></p>
                             <p><strong>Barbero:</strong> <?= $cita['barbero'] ?? 'Cualquiera' ?></p>
@@ -74,4 +80,5 @@ $citas = $citaModel->obtenerCitasPorUsuario($usuario['id']);
         </nav>
     </footer>
 </body>
+
 </html>

@@ -1406,23 +1406,64 @@ input[type="radio"]:checked + label.metodo-item span {
 }
 
 .citas-usuario {
-    padding: 30px;
-    font-family: 'Monserrat', sans-serif;
+  padding: 30px;
+  font-family: 'Monserrat', sans-serif;
 }
 
 .lista-citas {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 
 .cita-item {
-    background-color: #f1f1f1;
-    border-left: 6px solid #39a9a7;
-    padding: 15px;
-    border-radius: 12px;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  background-color: #f1f1f1;
+  border-left: 6px solid #39a9a7;
+  padding: 15px;
+  border-radius: 12px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 }
+
+.cita-pendiente {
+  background-color: #e0f5db;
+  border-left-color: #7ac94a;
+}
+
+.cita-realizada {
+  background-color: #f8d5d5;
+  border-left-color: #d15555;
+}
+
+.botones-citas {
+  margin: 20px 0;
+  display: flex;
+  gap: 10px;
+  justify-content: left;
+}
+
+.boton-estado {
+  padding: 10px 20px;
+  background-color: #d4d4d4;
+  color: #111;
+  text-decoration: none;
+  border-radius: 10px;
+  font-weight: bold;
+  font-family: 'Monserrat', sans-serif;
+  border: 2px solid transparent;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.boton-estado:hover {
+  background-color: #c0e6e6;
+  color: #000;
+}
+
+.boton-estado.activo {
+  background-color: #39a9a7;
+  color: #fff;
+  border-color: #1f746f;
+}
+
 
 
 

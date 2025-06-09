@@ -45,7 +45,7 @@ $rol = $usuario['rol'] ?? null;
                                     <?= htmlspecialchars($usuario['nombre']) ?>
                                 </button>
                             </li>
-                            <li><a href="../app/views/usuario/citas.php" class="boton-perfil"><i class="fa fa-calendar"></i> Citas</a></li>
+                            <li><a href="../app/views/usuario/citas.php?estado=pendiente" class="boton-perfil"><i class="fa fa-calendar"></i> Citas</a></li>
                         <?php endif; ?>
 
 
