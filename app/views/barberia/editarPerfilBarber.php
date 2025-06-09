@@ -32,14 +32,14 @@ $usuario = $_SESSION['usuario'] ?? null;
     <main>
         <section class="formulario-barberia" id="formBarberia">
             <h1>Editar Perfil</h1>
-        
+
             <form action="../../../public/api/barberia.php" method="POST" enctype="multipart/form-data">
                 <input type="hidden" name="action" value="editarPerfil">
-                
-            <input type="hidden" name="servicios" :value="JSON.stringify(servicios)">
-            <input type="hidden" name="empleados" :value="JSON.stringify(empleados)">
-            <input type="hidden" name="horarios" :value="JSON.stringify(horarios)">
-            <input type="hidden" name="redesSociales" :value="JSON.stringify(redesSociales)">
+
+                <input type="hidden" name="servicios" id="input-servicios">
+                <input type="hidden" name="empleados" id="input-empleados">
+                <input type="hidden" name="horarios" id="input-horarios">
+                <input type="hidden" name="redesSociales" id="input-redes">
 
                 <label for="nombre">NOMBRE</label>
                 <input type="text" id="nombre" name="nombre" value="<?= htmlspecialchars($usuario['nombre']) ?>">
@@ -63,12 +63,19 @@ $usuario = $_SESSION['usuario'] ?? null;
                 <label for="direccion">DIRECCIÓN</label>
                 <input type="text" id="direccion" name="direccion" value="<?= isset($usuario['direccion']) ? htmlspecialchars($usuario['direccion']) : '' ?>">
 
+                <!-- SERVICIOS -->
                 <label>SERVICIOS + PRECIOS</label>
-                <div v-for="(servicio, index) in servicios" :key="index" class="grupo-servicio">
+                <div v-for="(servicio, index) in servicios" :key="servicio.id || index" class="grupo-servicio">
                     <input type="text" v-model="servicio.nombre" placeholder="Nombre del servicio">
-                    <input type="number" v-model="servicio.precio" placeholder="€" min="0" step="0.01" >
-                    <button type="button" class="boton-add" @click="agregarServicio"><i class="fa fa-plus"></i></button>
+                    <input type="number" v-model="servicio.precio" placeholder="€" min="0" step="0.01">
                 </div>
+
+                <!-- BOTÓN FUERA del v-for -->
+                <button type="button" class="boton-add" @click="agregarServicio">
+                    <i class="fa fa-plus"></i> Añadir servicio
+                </button>
+
+
 
                 <label>EMPLEADOS</label>
                 <div v-for="(empleado, index) in empleados" :key="index" class="grupo-empleado">
@@ -95,7 +102,7 @@ $usuario = $_SESSION['usuario'] ?? null;
                         <option>Domingo</option>
 
                     </select>
-                    <input type="time" v-model="horario.inicio" >
+                    <input type="time" v-model="horario.inicio">
                     <span class="separador">-</span>
                     <input type="time" v-model="horario.fin">
                     <button type="button" class="boton-add" @click="agregarHorario"><i class="fa fa-plus"></i></button>

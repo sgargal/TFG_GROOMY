@@ -109,6 +109,7 @@ class Barberia
 
             // 6. Insertar servicios
             foreach ($servicios as $servicio) {
+                unset($servicio['id']); 
                 if (empty(trim($servicio['nombre'])) || $servicio['precio'] === '' || $servicio['precio'] === null) {
                     continue;
                 }

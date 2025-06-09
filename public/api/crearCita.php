@@ -35,7 +35,6 @@ if (!$idUsuario || !$idBarberia || !$idServicio || !$fecha || !$hora || !$metodo
 
 // Combinar fecha y hora
 $fechaHora = "$fecha $hora:00";
-$estado = 'no pagada';
 
 // Si no hay barbero concreto
 if ($idBarbero == 0) {
@@ -50,7 +49,6 @@ $ok = $citaModel->crearCita(
     $idBarbero,
     $idServicio,
     $metodoPago,
-    $estado,
     $fechaHora
 );
 

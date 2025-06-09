@@ -48,7 +48,7 @@ const app = Vue.createApp({
 
                     setTimeout(() => {
                         window.location.href = '/dashboard/groomy/app/views/usuario/citas.php';
-                    }, 1500);
+                    }, 5500);
                 } else {
                     this.estadoReserva = 'error';
                 }
@@ -66,12 +66,7 @@ const app = Vue.createApp({
         this.servicioSeleccionado = Number(datos.servicioSeleccionado) || (datos.servicios[0]?.id || null);
         console.log("servicioSeleccionado inicial:", this.servicioSeleccionado, typeof this.servicioSeleccionado);
     }
-  },
-  watch: {
-  servicioSeleccionado(newVal) {
-    console.log("Servicio seleccionado cambió a:", newVal);
   }
-}
 
 });
 

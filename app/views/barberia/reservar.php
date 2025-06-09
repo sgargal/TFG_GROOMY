@@ -54,7 +54,7 @@ $servicioSeleccionado = isset($_GET['servicio']) ? (int)$_GET['servicio'] : null
     </header>
     <main class="contenedor-reserva">
         <div id="app-reserva">
-            <form ref="formulario" action="../../controllers/CitaController.php" method="POST" class="formulario-reserva">
+            <form ref="formulario" action="../../../public/api/crearCita.php" method="POST" class="formulario-reserva">
                 <div class="reserva-layout">
                     <!-- IZQUIERDA -->
                     <div class="columna-izquierda">
@@ -79,19 +79,6 @@ $servicioSeleccionado = isset($_GET['servicio']) ? (int)$_GET['servicio'] : null
                         <section class="reserva-bloque">
                             <h3>Empleado:</h3>
                             <div class="grupo-empleados">
-                                <!-- Opción "Cualquiera" -->
-                                <input
-                                    type="radio"
-                                    name="id_barbero"
-                                    value="0"
-                                    id="barbero_0"
-                                    v-model="barberoSeleccionado"
-                                    hidden>
-                                <label for="barbero_0" class="empleado-item seleccionado">
-                                    <img src="../../../assets/src/sinImagen.png" alt="Cualquiera">
-                                    <span>Cualquiera</span>
-                                </label>
-
                                 <!-- Empleados reales -->
                                 <?php foreach ($empleados as $empleado): ?>
                                     <input
