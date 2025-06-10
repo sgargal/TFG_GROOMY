@@ -108,6 +108,7 @@ if ($ok) {
               <li>Servicio: {$nombre_servicio}</li>
               <li>Barbero: {$nombre_barbero}</li>
             </ul>
+            <h4>¡Muchas gracias por confiar en GROOMY para reservar tu cita!</h4>
         ";
         $mail->AltBody = "Reserva: Fecha {$fecha}, Hora {$hora}, Servicio {$nombre_servicio}, Barbero {$nombre_barbero}";
 
