@@ -1405,26 +1405,81 @@ input[type="radio"]:checked + label.metodo-item span {
   background-color: #467e7c;
 }
 
+.contenedor-citas-barberia {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  font-family: 'Monserrat', sans-serif;
+}
 .citas-usuario {
   padding: 30px;
   font-family: 'Monserrat', sans-serif;
 }
 
+/* Filtros de citas en la parte superior */
+.filtros-citas-barberia {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  margin: 20px auto 10px auto;
+  justify-content: center;
+  align-items: center;
+  background: #6b6b6b;
+  padding: 18px 25px;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(57, 192, 190, 0.952);
+  font-family: 'Monserrat', sans-serif;
+}
+
+.filtros-citas-barberia label {
+  font-weight: 600;
+  color: #000000;
+  margin-right: 5px;
+}
+
+.filtros-citas-barberia input[type="date"],
+.filtros-citas-barberia select {
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: 1px solid #39a9a7;
+  background: #fff;
+  font-size: 1rem;
+  font-family: 'Monserrat', sans-serif;
+  transition: border-color 0.3s;
+}
+
+.filtros-citas-barberia input[type="date"]:focus,
+.filtros-citas-barberia select:focus {
+  border-color: #1f746f;
+  outline: none;
+}
+
+.filtros-citas-barberia .boton-estandar {
+  margin-left: 10px;
+  padding: 10px 18px;
+  font-size: 1rem;
+}
+
+/* Lista de citas */
 .lista-citas {
   display: flex;
   flex-direction: column;
   gap: 20px;
+  margin-bottom: 10px;
+  font-family: 'Monserrat', sans-serif;
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .cita-item {
   background-color: #f9f9f9;
   border-left: 6px solid #39a9a7;
-  padding: 25px 30px;
+  padding: 30px 30px;
   border-radius: 16px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
   font-family: 'Monserrat', sans-serif;
-  max-width: 700px;
-  margin: 0 auto;
+  width: 100%;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
@@ -1452,6 +1507,13 @@ input[type="radio"]:checked + label.metodo-item span {
 .cita-realizada {
   background-color: #f8d5d5;
   border-left-color: #d15555;
+}
+
+.contenedor-citas-barberia h2 {
+  text-align: center;
+  color: #000000;
+  font-family: 'Monserrat', sans-serif;
+  font-size: 2rem;
 }
 
 .botones-citas {
@@ -1484,20 +1546,6 @@ input[type="radio"]:checked + label.metodo-item span {
   border-color: #1f746f;
 }
 
-.filtros-citas-barberia {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 15px;
-  margin: 20px auto;
-  justify-content: center;
-  align-items: center;
-}
-
-.filtros-citas-barberia label,
-.filtros-citas-barberia input,
-.filtros-citas-barberia select {
-  font-size: 1rem;
-}
 
 
 

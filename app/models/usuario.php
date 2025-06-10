@@ -124,7 +124,19 @@ class Usuario {
 
     } catch (PDOException $e) {
         return "Error: " . $e->getMessage();
-    }
+    } 
+}
+public function obtenerUsuarioPorId($id) {
+    $sql = 'SELECT id, nombre, email
+            FROM usuarios
+            WHERE id = :id
+            LIMIT 1';
+    $stmt = $this->db->Conectar()->prepare($sql);
+    $stmt->bindValue(':id', $id, PDO::PARAM_INT);
+    $stmt->execute();
+
+    return $stmt->fetch(PDO::FETCH_ASSOC);
+
 }
 
 

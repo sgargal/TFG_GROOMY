@@ -21,7 +21,7 @@
   <section class="faq-contact">
     <h2>¿Tienes alguna pregunta?</h2>
     <p class="contact-info">Puedes escribirnos directamente a nuestro correo: 
-      <a href="mailto:infogroomy@gmail.com"> infogroomy@gmail.com </a>
+      <a href="mailto:soportegroomy@gmail.com"> soportegroomy@gmail.com </a>
     </p>
 
     <p class="contact-info">O si prefieres, puedes llamarnos al teléfono: <strong> (+34) 900 000 000 </strong></p>

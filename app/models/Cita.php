@@ -113,6 +113,19 @@ class Cita {
         $stmt->execute([':usuario_id' => $usuarioId]);
         return $stmt->fetchColumn();
     }
+    public function obtenerInfoServicio($id)
+    {
+        $stmt = $this->db->prepare("SELECT nombre FROM servicio WHERE id = :id");
+        $stmt->execute([':id' => $id]);
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+
+    public function obtenerInfoBarbero($id)
+    {
+        $stmt = $this->db->prepare("SELECT nombre FROM barbero WHERE id = :id");
+        $stmt->execute([':id' => $id]);
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
 
 }
 

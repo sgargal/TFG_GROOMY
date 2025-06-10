@@ -4,11 +4,18 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
-header('Content-Type: text/plain'); // Para que Vue reciba texto simple
+header('Content-Type: application/json');
+require_once __DIR__ . '/../../vendor/autoload.php';
 
 require_once __DIR__ . '/../../app/models/Cita.php';
+require_once __DIR__ . '/../../app/models/usuario.php';
 
 use App\Models\Cita;
+use App\Models\Usuario;
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+$dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '/../../');
+$dotenv->load();
 
 // Solo aceptar POST
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
@@ -43,19 +50,75 @@ if ($idBarbero == 0) {
 
 // Guardar en BD
 $citaModel = new Cita();
-$ok = $citaModel->crearCita(
-    $idUsuario,
-    $idBarberia,
-    $idBarbero,
-    $idServicio,
-    $metodoPago,
-    $fechaHora
-);
+try {
+    $ok = $citaModel->crearCita(
+        $idUsuario,
+        $idBarberia,
+        $idBarbero,
+        $idServicio,
+        $metodoPago,
+        $fechaHora
+    );
+} catch (\PDOException $e) {
+    error_log("ERROR SQL crearCita: " . $e->getMessage());
+    $ok = false;
+}
 
-// Responder
+
 if ($ok) {
-    echo 'ok';
+    // —– ENVÍO DE CORREO —–
+    $usuarioModel = new Usuario();
+    $usuario = $usuarioModel->obtenerUsuarioPorId($idUsuario);
+    $mail = new PHPMailer(true);
+    try {
+        // Config SMTP
+        $mail = new PHPMailer(true);
+        $mail->isSMTP();
+        $mail->Host       = $_ENV['SMTP_HOST'];
+        $mail->SMTPAuth   = true;
+        $mail->Username   = $_ENV['SMTP_USER'];
+        $mail->Password   = $_ENV['SMTP_PASS'];
+        $mail->SMTPSecure = $_ENV['SMTP_SECURE'];
+        $mail->Port       = $_ENV['SMTP_PORT'];;
+        $mail->CharSet    = 'UTF-8';
+
+        // Remitente y destinatario
+        $mail->setFrom('soportegroomy@gmail.com', 'Groomy');
+        $mail->addAddress($usuario['email'], $usuario['nombre']);
+
+        // Contenido
+        $mail->isHTML(true);
+        // Obtener nombre de servicio
+        $infoServicio = $citaModel->obtenerInfoServicio($idServicio);
+        $nombre_servicio = $infoServicio['nombre'] ?? 'Servicio Desconocido';
+
+        // Obtener nombre del barbero
+        $nombre_barbero = 'No especificado';
+        if ($idBarbero) {
+            $infoBarbero = $citaModel->obtenerInfoBarbero($idBarbero);
+            $nombre_barbero = $infoBarbero['nombre'] ?? 'No especificado';
+        }
+        $mail->Subject = 'Confirmación de tu reserva';
+        $mail->Body    = "
+            <h3>Hola, {$usuario['nombre']}</h3>
+            <p>Resumen de tu reserva:</p>
+            <ul>
+              <li>Fecha: {$fecha}</li>
+              <li>Hora: {$hora}</li>
+              <li>Servicio: {$nombre_servicio}</li>
+              <li>Barbero: {$nombre_barbero}</li>
+            </ul>
+        ";
+        $mail->AltBody = "Reserva: Fecha {$fecha}, Hora {$hora}, Servicio {$nombre_servicio}, Barbero {$nombre_barbero}";
+
+        $mail->send();
+        echo json_encode(['success' => true, 'message' => 'Reserva OK y email enviado.']);
+    } catch (Exception $e) {
+        error_log("Mailer Error: {$mail->ErrorInfo}");
+        echo json_encode(['success' => true, 'message' => 'Reserva OK, fallo al enviar email.']);
+    }
 } else {
     http_response_code(500);
-    echo 'error';
+    echo json_encode(['success' => false, 'message' => 'Error al guardar cita.']);
 }
+

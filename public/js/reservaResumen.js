@@ -34,29 +34,31 @@ const app = Vue.createApp({
       this.mostrarResumen = true;
     },
     enviarFormulario() {
-        const form = this.$refs.formulario;
-        const formData = new FormData(form);
+      const formData = new FormData(this.$refs.formulario);
 
-        fetch('/dashboard/groomy/public/api/crearCita.php', {
-            method: 'POST',
-            body: formData
+      fetch('../../../public/api/crearCita.php', {
+        method: 'POST',
+        body: formData
+      })
+        .then(response => response.json())
+        .then(data => {
+          if (data.success) {
+            this.estadoReserva = 'exito';
+
+            setTimeout(() => {
+                        window.location.href = '/dashboard/groomy/app/views/usuario/citas.php?estado=pendiente';
+                    }, 1500);
+          } else {
+              this.estadoReserva = 'error';
+              console.error(data.message || 'Error desconocido');
+          }
         })
-            .then(res => res.text())
-            .then(respuesta => {
-                if (respuesta.includes('ok')) {
-                    this.estadoReserva = 'exito';
-
-                    setTimeout(() => {
-                        window.location.href = '/dashboard/groomy/app/views/usuario/citas.php';
-                    }, 5500);
-                } else {
-                    this.estadoReserva = 'error';
-                }
-            })
-            .catch(() => {
-                this.estadoReserva = 'error';
-            });
+        .catch(error => {
+          console.error('Error en la petición:', error);
+          this.estadoReserva = 'error';
+        });
     },
+
     inicializar(datos) {
         this.usuarioId = datos.usuarioId;
         this.barberiaId = datos.barberiaId;
