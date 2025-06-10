@@ -80,10 +80,10 @@ $horarios = $barberiaModel->obtenerHorarios($barberia['id']);
                 <ul class="lista-servicios">
                     <?php foreach ($servicios as $servicio): ?>
                         <li class="servicio-item">
-                            <a href="../barberia/reservar.php?id=<?= $barberia['id'] ?>&servicio=<?= $servicio['id'] ?>" class="servicio-link">
+                            <span class="servicio-link" @click="seleccionarServicio(<?= $servicio['id'] ?>, '<?= htmlspecialchars($servicio['nombre']) ?>')">
                                 <span class="nombre-servicio"><?= htmlspecialchars($servicio['nombre']) ?></span>
                                 <span class="precio-servicio"><?= htmlspecialchars($servicio['precio']) ?> €</span>
-                            </a>
+                            </span>
                         </li>
                     <?php endforeach; ?>
                 </ul>
@@ -156,7 +156,7 @@ $horarios = $barberiaModel->obtenerHorarios($barberia['id']);
 
             <div v-if="mostrarModalConfirmar" class="modal-overlay">
                 <div class="modal-box">
-                    <p>¿Quires reservar una cita para "{{ servicioSeleccionado }}"?</p>
+                    <p>¿Quieres reservar una cita para "{{ servicioSeleccionado }}"?</p>
                     <button @click="reservarAhora">Si, reservar</button>
                     <button @click="cerrarModal">Más tarde</button>
                 </div>
