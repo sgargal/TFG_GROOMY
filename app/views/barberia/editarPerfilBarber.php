@@ -4,6 +4,9 @@ if (session_status() === PHP_SESSION_NONE) {
 }
 
 $usuario = $_SESSION['usuario'] ?? null;
+
+error_log('DEBUG POST editarPerfil: '. print_r($_POST, true));
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -72,7 +75,7 @@ $usuario = $_SESSION['usuario'] ?? null;
 
                 <!-- BOTÓN FUERA del v-for -->
                 <button type="button" class="boton-add" @click="agregarServicio">
-                    <i class="fa fa-plus"></i> Añadir servicio
+                    <i class="fa fa-plus"></i>
                 </button>
 
 
@@ -86,8 +89,8 @@ $usuario = $_SESSION['usuario'] ?? null;
                         <input type="file" @change="cargarImagen($event, index)" accept="image/*" hidden>
                     </label>
 
-                    <button type="button" class="boton-add" @click="agregarEmpleado"><i class="fa fa-plus"></i></button>
                 </div>
+                <button type="button" class="boton-add" @click="agregarEmpleado"><i class="fa fa-plus"></i></button>
 
                 <label>HORARIOS</label>
                 <div v-for="(horario, index) in horarios" :key="index" class="grupo-horario">
@@ -105,8 +108,9 @@ $usuario = $_SESSION['usuario'] ?? null;
                     <input type="time" v-model="horario.inicio">
                     <span class="separador">-</span>
                     <input type="time" v-model="horario.fin">
-                    <button type="button" class="boton-add" @click="agregarHorario"><i class="fa fa-plus"></i></button>
                 </div>
+
+                <button type="button" class="boton-add" @click="agregarHorario"><i class="fa fa-plus"></i></button>
 
                 <label>REDES SOCIALES</label>
                 <div v-for="(red,index) in redesSociales" :key="index" class="grupo-redes">
@@ -118,9 +122,8 @@ $usuario = $_SESSION['usuario'] ?? null;
                     </select>
 
                     <input type="text" v-model="red.url" placeholder="URL de la red social">
-
-                    <button type="button" class="boton-add" @click="agregarRed"><i class="fa fa-plus"></i></button>
                 </div>
+                <button type="button" class="boton-add" @click="agregarRed"><i class="fa fa-plus"></i></button>
 
                 <label for="descripcion">INFORMACIÓN</label>
                 <input type="text" id="descripcion" name="descripcion" value="<?= isset($usuario['descripcion']) ? htmlspecialchars($usuario['descripcion']) : '' ?>" placeholder="Añade información interesante sobre tu barberia">

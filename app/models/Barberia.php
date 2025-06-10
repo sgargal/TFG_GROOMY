@@ -101,74 +101,128 @@ class Barberia
                 $barberiaId = $this->db->lastInsertId();
             }
 
-            // 5. Borrar datos antiguos
-            $this->db->prepare("DELETE FROM servicio WHERE id_barberia = :id")->execute([':id' => $barberiaId]);
-            $this->db->prepare("DELETE FROM barbero WHERE id_barberia = :id")->execute([':id' => $barberiaId]);
-            $this->db->prepare("DELETE FROM horario WHERE id_barberia = :id")->execute([':id' => $barberiaId]);
-            $this->db->prepare("DELETE FROM redes_sociales WHERE id_barberia = :id")->execute([':id' => $barberiaId]);
+            // 5. Borrar solo los servicios que NO están en el POST y que no tienen citas
+            // — obtiene todos los IDs enviados desde el formulario
+            $idsEnForm = array_column($servicios, 'id');
+
+            // Si algún servicio nuevo viene sin ID, lo insertaremos más abajo
+            $idsEnFormFiltrados = array_filter($idsEnForm, fn($x) => !empty($x));
+
+            // Prepara la lista de IDs seguros para borrar (si existe y no está en form)
+            $sqlDel = "DELETE FROM servicio
+                        WHERE id_barberia = :barberia
+                        AND id NOT IN (" . (empty($idsEnFormFiltrados) ? "0" : implode(',', $idsEnFormFiltrados)) . ")
+                        AND id NOT IN (SELECT id_servicio FROM cita WHERE id_barberia = :barberia)
+                ";
+            $stmt = $this->db->prepare($sqlDel);
+            $stmt->execute([':barberia' => $barberiaId]);
 
             // 6. Insertar servicios
             foreach ($servicios as $servicio) {
-                unset($servicio['id']); 
-                if (empty(trim($servicio['nombre'])) || $servicio['precio'] === '' || $servicio['precio'] === null) {
+                $id = $servicio['id'] ?? null;
+                $nombre = trim($servicio['nombre']);
+                $precio = $servicio['precio'];
+
+                if ($nombre === '' || $precio === '' || $precio === null) {
                     continue;
                 }
 
-                $stmt = $this->db->prepare("INSERT INTO servicio (nombre, precio, id_barberia) VALUES (:nombre, :precio, :id)");
-                $stmt->execute([
-                    ':nombre' => $servicio['nombre'],
-                    ':precio' => $servicio['precio'],
-                    ':id' => $barberiaId
-                ]);
-            }
-
-
-            // 7. Insertar empleados
-            foreach ($empleados as $empleado) {
-                if (empty(trim($empleado['nombre']))) {
-                    continue;
+                if ($id) {
+                    // Actualizar servicio existente
+                    $stmt = $this->db->prepare("UPDATE servicio SET nombre = :nombre, precio = :precio WHERE id = :id AND id_barberia = :barberia");
+                    $stmt->execute([
+                        ':nombre' => $nombre,
+                        ':precio' => $precio,
+                        ':id' => $id,
+                        ':barberia' => $barberiaId
+                    ]);
+                } else {
+                    // Insertar nuevo servicio
+                    $stmt = $this->db->prepare("INSERT INTO servicio (nombre, precio, id_barberia) VALUES (:nombre, :precio, :id)");
+                    $stmt->execute([
+                        ':nombre' => $nombre,
+                        ':precio' => $precio,
+                        ':id' => $barberiaId
+                    ]);
                 }
-
-                $stmt = $this->db->prepare("INSERT INTO barbero (nombre, imagen, id_barberia) VALUES (:nombre, :imagen, :id)");
-                $stmt->execute([
-                    ':nombre' => $empleado['nombre'],
-                    ':imagen' => $empleado['imagen'] ?? null,
-                    ':id' => $barberiaId
-                ]);
             }
 
+            //   7. Empleados: borrar solo los que no vienen en POST
+            $idsEmpsEnForm = array_column($empleados, 'id');
+            $idsEmpsFiltr = array_filter($idsEmpsEnForm, fn($x) => !empty($x));
 
-            // 8. Insertar horarios
-            foreach ($horarios as $horario) {
-                if (empty($horario['dia']) || empty($horario['inicio']) || empty($horario['fin'])) {
-                    continue;
+            
+            $sqlDelEmp = "DELETE FROM barbero
+                            WHERE id_barberia = :barberia
+                            AND id NOT IN (" . (empty($idsEmpsFiltr) ? "0" : implode(',', $idsEmpsFiltr)) . ")";
+            $this->db->prepare($sqlDelEmp)->execute([':barberia' => $barberiaId]);
+
+            // Ahora recorrer POST para actualizar o insertar
+            foreach ($empleados as $emp) {
+                $idEmp = $emp['id'] ?? null;
+                $nombre = trim($emp['nombre']);
+                if ($nombre === '') continue;
+
+                if ($idEmp) {
+                    // Actualiza existente
+                    $stmt = $this->db->prepare("UPDATE barbero
+                                                SET nombre = :nombre, imagen = :imagen
+                                                WHERE id = :id AND id_barberia = :barberia");
+                    $stmt->execute([
+                        ':nombre'  => $nombre,
+                        ':imagen'  => $emp['imagen'] ?? null,
+                        ':id'      => $idEmp,
+                        ':barberia' => $barberiaId
+                    ]);
+                } else {
+                    // Inserta nuevo
+                    $stmt = $this->db->prepare("INSERT INTO barbero (id_barberia, nombre, imagen)
+                                                VALUES (:barberia, :nombre, :imagen)");
+                    $stmt->execute([
+                        ':barberia' => $barberiaId,
+                        ':nombre'  => $nombre,
+                        ':imagen'  => $emp['imagen'] ?? null
+                    ]);
                 }
-
-                $stmt = $this->db->prepare("INSERT INTO horario (id_barberia, dia, hora_inicio, hora_fin) VALUES (:id, :dia, :inicio, :fin)");
-                $stmt->execute([
-                    ':id' => $barberiaId,
-                    ':dia' => $horario['dia'],
-                    ':inicio' => $horario['inicio'],
-                    ':fin' => $horario['fin']
-                ]);
             }
 
+            //   9. Redes sociales: lo mismo
+            $idsRedesEnForm = array_column($redes, 'id');
+            $idsRedesFiltr = array_filter($idsRedesEnForm, fn($x) => !empty($x));
 
-            // 9. Insertar redes sociales
+            $sqlDelRed = " DELETE FROM redes_sociales
+                            WHERE id_barberia = :barberia
+                            AND id NOT IN (" . (empty($idsRedesFiltr) ? "0" : implode(',', $idsRedesFiltr)) . ")";
+            $this->db->prepare($sqlDelRed)->execute([':barberia' => $barberiaId]);
+
             foreach ($redes as $red) {
-                if (empty(trim($red['tipo'])) || empty(trim($red['url']))) {
-                    continue;
+                $idRed = $red['id'] ?? null;
+                $tipo  = trim($red['tipo']);
+                $url   = trim($red['url']);
+                if ($tipo === '' || $url === '') continue;
+
+                if ($idRed) {
+                    // Actualiza existente
+                    $stmt = $this->db->prepare("UPDATE redes_sociales
+                                                SET nombre_red_social = :tipo, url = :url
+                                                WHERE id = :id AND id_barberia = :barberia");
+                    $stmt->execute([
+                        ':tipo'    => $tipo,
+                        ':url'     => $url,
+                        ':id'      => $idRed,
+                        ':barberia' => $barberiaId
+                    ]);
+                } else {
+                    // Inserta nueva
+                    $stmt = $this->db->prepare("INSERT INTO redes_sociales (id_barberia, nombre_red_social, url)
+                                                VALUES (:barberia, :tipo, :url)");
+                    $stmt->execute([
+                        ':barberia' => $barberiaId,
+                        ':tipo'    => $tipo,
+                        ':url'     => $url
+                    ]);
                 }
-
-                $stmt = $this->db->prepare("INSERT INTO redes_sociales (id_barberia, nombre_red_social, url) VALUES (:id, :nombre, :url)");
-                $stmt->execute([
-                    ':id' => $barberiaId,
-                    ':nombre' => $red['tipo'],
-                    ':url' => $red['url']
-                ]);
             }
-
-
             return true;
         } catch (\PDOException $e) {
             error_log("Error en editarBarberiaCompleta: " . $e->getMessage());
