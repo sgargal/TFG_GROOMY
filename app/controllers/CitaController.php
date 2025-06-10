@@ -58,6 +58,41 @@ class CitaController
 
         require_once __DIR__ . '/../views/usuario/citas.php';
     }
+
+    public function cancelarCita() {
+    $data = json_decode(file_get_contents("php://input"), true);
+    $idCita = $data['id_cita'] ?? null;
+
+    if (!$idCita) {
+        echo json_encode(['message' => 'ID de cita no proporcionado']);
+        return;
+    }
+
+    $modelo = new Cita();
+    $ok = $modelo->actualizarEstado($idCita, 'cancelada');
+
+    echo json_encode([
+        'message' => $ok ? 'Cita cancelada con éxito.' : 'Error al cancelar la cita.'
+    ]);
+}
+
+public function marcarComoRealizada() {
+    $data = json_decode(file_get_contents("php://input"), true);
+    $idCita = $data['id_cita'] ?? null;
+
+    if (!$idCita) {
+        echo json_encode(['message' => 'ID de cita no proporcionado']);
+        return;
+    }
+
+    $modelo = new Cita();
+    $ok = $modelo->actualizarEstado($idCita, 'realizada');
+
+    echo json_encode([
+        'message' => $ok ? 'Cita marcada como realizada.' : 'Error al actualizar la cita.'
+    ]);
+}
+
 }
 
 ?>

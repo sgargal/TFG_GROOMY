@@ -150,6 +150,15 @@ class Cita {
         $stmt->execute([':id' => $id]);
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
+    public function actualizarEstado($id, $nuevoEstado)
+    {
+        $stmt = $this->db->prepare("UPDATE cita SET estado = :estado WHERE id = :id");
+        return $stmt->execute([
+            ':estado' => $nuevoEstado,
+            ':id' => $id
+        ]);
+    }
+
 
 }
 

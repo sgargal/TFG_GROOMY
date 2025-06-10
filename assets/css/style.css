@@ -104,6 +104,14 @@ body {
     background-color: #690303;
 }
 
+.botones-citas {
+  display: flex;
+  align-items: center;
+  justify-content: center; 
+  gap: 10px; 
+  margin-top: 10px; 
+}
+
 .icono-perfil {
     font-size: 24px;
     vertical-align: middle;
