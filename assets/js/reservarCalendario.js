@@ -44,6 +44,7 @@ document.addEventListener('DOMContentLoaded', () => {
             fechaInput.value = fechaISO;
             if (window.vm) {
                 vm.fecha = fechaISO;
+                vm.cargarHorasDisponibles();
             }
 
             // Cargar horas disponibles

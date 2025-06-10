@@ -54,7 +54,7 @@ $servicioSeleccionado = isset($_GET['servicio']) ? (int)$_GET['servicio'] : null
     </header>
     <main class="contenedor-reserva">
         <div id="app-reserva">
-            <form ref="formulario" action="../../../public/api/crearCita.php" method="POST" class="formulario-reserva">
+            <form ref="formulario" class="formulario-reserva" @submit.prevent>
                 <div class="reserva-layout">
                     <!-- IZQUIERDA -->
                     <div class="columna-izquierda">
@@ -87,6 +87,7 @@ $servicioSeleccionado = isset($_GET['servicio']) ? (int)$_GET['servicio'] : null
                                         value="<?= $empleado['id'] ?>"
                                         id="barbero_<?= $empleado['id'] ?>"
                                         v-model="barberoSeleccionado"
+                                        @change="cargarHorasDisponibles"
                                         hidden>
                                     <label for="barbero_<?= $empleado['id'] ?>" class="empleado-item">
                                         <img class="avatar-empleado"

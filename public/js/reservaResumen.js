@@ -67,9 +67,39 @@ const app = Vue.createApp({
         // Si servicioSeleccionado viene de la URL, usarlo, si no usar el primero
         this.servicioSeleccionado = Number(datos.servicioSeleccionado) || (datos.servicios[0]?.id || null);
         console.log("servicioSeleccionado inicial:", this.servicioSeleccionado, typeof this.servicioSeleccionado);
-    }
-  }
+    },
+    cargarHorasDisponibles() {
+      const idBarbero = Number(this.barberoSeleccionado ?? 0); // fuerza a número
+      const url = `../../../app/controllers/api/getHorariosDisponibles.php?id_barberia=${this.barberiaId}&fecha=${this.fecha}&id_barbero=${idBarbero}`;
 
+      console.log("⏳ Cargando horas para:", this.fecha, "Barbero:", idBarbero);
+
+      fetch(url)
+        .then(response => response.json())
+        .then(data => {
+          const horasContainer = document.getElementById('horas-disponibles');
+          horasContainer.innerHTML = '';
+
+          data.forEach(hora => {
+            const btn = document.createElement('button');
+            btn.textContent = hora;
+            btn.classList.add('boton-hora');
+            btn.addEventListener('click', () => {
+              this.hora = hora;
+              document.querySelectorAll('#bloque-horas button').forEach(b => b.classList.remove('seleccionado'));
+              btn.classList.add('seleccionado');
+            });
+            horasContainer.appendChild(btn);
+          });
+
+          document.getElementById('bloque-horas').style.display = data.length > 0 ? 'block' : 'none';
+        })
+        .catch(error => {
+          console.error(' Error cargando horas:', error);
+        });
+    }
+
+  }
 });
 
 window.vm = app.mount('#app-reserva'); 

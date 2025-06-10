@@ -43,6 +43,30 @@ class Cita {
         ]);
         return array_column($stmt->fetchAll(PDO::FETCH_ASSOC), 'hora');
     }
+    public function obtenerHorasReservadasBarbero($idBarbero, $fecha)
+    {
+        error_log("➡️ BUSCANDO horas reservadas para barbero=$idBarbero en fecha=$fecha");
+
+        $stmt = $this->db->prepare("
+        SELECT DATE_FORMAT(fecha_hora, '%H:%i') AS hora
+        FROM cita
+        WHERE id_barbero = :barbero
+        AND DATE(fecha_hora) = :fecha
+    ");
+
+        $stmt->execute([
+            ':barbero' => $idBarbero,
+            ':fecha' => $fecha
+        ]);
+
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        error_log("📦 Resultado crudo:");
+        error_log(print_r($result, true));
+
+        return $result;
+    }
+
 
     public function obtenerCitasPorUsuario($idUsuario, $estado = 'pendiente')
     {

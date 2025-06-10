@@ -1237,7 +1237,7 @@ footer.footer img:hover {
 }
 
 
-.boton-reserva {
+.boton-hora {
   padding: 10px 15px;
   background-color: #e0f7f6;
   border: 2px solid #39a9a7;
@@ -1249,13 +1249,13 @@ footer.footer img:hover {
   font-family: 'Monserrat', sans-serif;
 }
 
-.boton-reserva:hover {
+.boton-hora:hover {
   background-color: #00bfa6;
   color: white;
 }
 
 /* Cuando una hora está seleccionada */
-.boton-reserva.seleccionada {
+.boton-hora.seleccionada {
   background-color: #00bfa6;
   color: white;
   border-color: #007e72;
