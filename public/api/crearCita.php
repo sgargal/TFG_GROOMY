@@ -98,6 +98,17 @@ if ($ok) {
             $infoBarbero = $citaModel->obtenerInfoBarbero($idBarbero);
             $nombre_barbero = $infoBarbero['nombre'] ?? 'No especificado';
         }
+        // Calcular horas para Google Calendar
+        $start = date('Ymd\THis\Z', strtotime("$fecha $hora"));
+        $end = date('Ymd\THis\Z', strtotime("$fecha $hora +30 minutes")); // ajusta duración si hace falta
+
+        $googleCalendarUrl = "https://www.google.com/calendar/render?action=TEMPLATE" .
+            "&text=" . urlencode("Cita - $nombre_servicio") .
+            "&dates={$start}/{$end}" .
+            "&details=" . urlencode("Tu cita con $nombre_barbero para $nombre_servicio") .
+            "&location=" . urlencode("Te esperamos en tu barbería favorita. ¡Gracias por usar Groomy!") .
+            "&sf=true&output=xml";
+
         $mail->Subject = 'Confirmación de tu reserva';
         $mail->Body    = "
             <h3>Hola, {$usuario['nombre']}</h3>
@@ -108,7 +119,18 @@ if ($ok) {
               <li>Servicio: {$nombre_servicio}</li>
               <li>Barbero: {$nombre_barbero}</li>
             </ul>
-            <h4>¡Muchas gracias por confiar en GROOMY para reservar tu cita!</h4>
+            <p>
+                <a href='$googleCalendarUrl' style='
+                    display:inline-block;
+                    padding:10px 20px;
+                    background-color:#000;
+                    color:#fff;
+                    text-decoration:none;
+                    border-radius:5px;
+                    font-weight:bold;
+                '>Añadir a Google Calendar</a>
+            </p>
+            <h4>¡Muchas gracias por confiar en GROOMY para reservar tu cita! 😊</h4>
         ";
         $mail->AltBody = "Reserva: Fecha {$fecha}, Hora {$hora}, Servicio {$nombre_servicio}, Barbero {$nombre_barbero}";
 
