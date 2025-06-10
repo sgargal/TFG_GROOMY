@@ -28,6 +28,7 @@ $citas = $citaModel->obtenerCitasPorUsuario($usuario['id'], $estado);
     <link rel="icon" href="../../../assets/src/logoGROOMY-fondosin.png">
     <link rel="stylesheet" href="../../../assets/css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+      <script src="https://cdn.jsdelivr.net/npm/vue@3/dist/vue.global.js"></script>
 </head>
 
 <body>
@@ -42,29 +43,43 @@ $citas = $citaModel->obtenerCitasPorUsuario($usuario['id'], $estado);
         </nav>
     </header>
     <main>
-        <section class="citas-usuario">
-            <h2>Tus citas</h2>
-            <div class="botones-citas" style="margin-bottom: 20px;">
-                <a href="?estado=pendiente" class="boton-estado <?= $estado === 'pendiente' ? 'activo' : '' ?>">Pendientes</a>
-                <a href="?estado=realizada" class="boton-estado <?= $estado === 'realizada' ? 'activo' : '' ?>">Realizadas</a>
-            </div>
-            <?php if (empty($citas)): ?>
-                <p>No tienes ninguna cita pendiente.</p>
-            <?php else: ?>
-                <div class="lista-citas">
-                    <?php foreach ($citas as $cita): ?>
-                        <div class="cita-item <?= $cita['estado'] === 'pendiente' ? 'cita-pendiente' : 'cita-realizada' ?>">
-                            <p><strong>Barbería:</strong> <?= htmlspecialchars($cita['barberia']) ?></p>
-                            <p><strong>Servicio:</strong> <?= htmlspecialchars($cita['servicio']) ?></p>
-                            <p><strong>Barbero:</strong> <?= $cita['barbero'] ?? 'Cualquiera' ?></p>
-                            <p><strong>Fecha:</strong> <?= date('d/m/Y', strtotime($cita['fecha_hora'])) ?></p>
-                            <p><strong>Hora:</strong> <?= date('H:i', strtotime($cita['fecha_hora'])) ?></p>
-                            <p><strong>Método de pago:</strong> <?= htmlspecialchars($cita['metodo_pago']) ?></p>
-                        </div>
-                    <?php endforeach; ?>
+        <div id="appCita">
+            <section class="citas-usuario">
+                <h2>Tus citas</h2>
+                <div class="botones-citas" style="margin-bottom: 20px;">
+                    <a href="?estado=pendiente" class="boton-estado <?= $estado === 'pendiente' ? 'activo' : '' ?>">Pendientes</a>
+                    <a href="?estado=realizada" class="boton-estado <?= $estado === 'realizada' ? 'activo' : '' ?>">Realizadas</a>
                 </div>
-            <?php endif; ?>
-        </section>
+                <?php if (empty($citas)): ?>
+                    <p>No tienes ninguna cita pendiente.</p>
+                <?php else: ?>
+                    <div class="lista-citas">
+                        <?php foreach ($citas as $cita): ?>
+                            <div class="cita-item <?= $cita['estado'] === 'pendiente' ? 'cita-pendiente' : 'cita-realizada' ?>">
+                                <p><strong>Barbería:</strong> <?= htmlspecialchars($cita['barberia']) ?></p>
+                                <p><strong>Servicio:</strong> <?= htmlspecialchars($cita['servicio']) ?></p>
+                                <p><strong>Barbero:</strong> <?= $cita['barbero'] ?? 'Cualquiera' ?></p>
+                                <p><strong>Fecha:</strong> <?= date('d/m/Y', strtotime($cita['fecha_hora'])) ?></p>
+                                <p><strong>Hora:</strong> <?= date('H:i', strtotime($cita['fecha_hora'])) ?></p>
+                                <p><strong>Método de pago:</strong> <?= htmlspecialchars($cita['metodo_pago']) ?></p>
+                                <?php if ($cita['estado'] === 'pendiente'): ?>
+                                    <div class="botones-citas">
+                                        <button @click="abrirModal('cancelada', <?= $cita['id'] ?>)" class="boton-cerrar">Cancelar</button>
+                                    </div>
+                                <?php endif; ?>
+                            </div>
+                        <?php endforeach; ?>
+                    </div>
+                <?php endif; ?>
+            </section>
+            <section v-if="mostrarModal" class="modal-overlay">
+                <section class="modal-content">
+                    <p>¿Estás seguro de que quieres {{ accion === 'realizada' ? 'marcar como realizada' : 'cancelar'}} esta cita?</p>
+                    <button @click="confirmarAccion" class="boton-confirmar">Sí</button>
+                    <button @click="mostrarModal = false" class="boton-cerrar">No</button>
+                </section>
+            </section>
+        </div>
     </main>
     <footer class="footer">
         <nav>
@@ -79,6 +94,7 @@ $citas = $citaModel->obtenerCitasPorUsuario($usuario['id'], $estado);
             </ul>
         </nav>
     </footer>
+    <script src="../../../public/js/abrirModal.js" defer></script>
 </body>
 
 </html>
