@@ -21,16 +21,21 @@ createApp ({
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
                     id_cita: this.citaSeleccionada,
-                    estado: this.accion // 'realizada' o 'cancelada'
+                    estado: this.accion
                 })
             })
                 .then(res => res.json())
                 .then(data => {
-                    alert(data.message);
-                    this.mostrarModal = false;
-                    location.reload();
+                    if (data.message && data.message.includes('Cita actualizada')) {
+                        this.mostrarModal = false;
+                        location.reload();
+                    } else {
+                        alert('Error: ' + data.message);
+                    }
+                })
+                .catch(error => {
+                    alert('Error de red o servidor: ' + error);
                 });
-
         }
     }
 }).mount('#appCita');

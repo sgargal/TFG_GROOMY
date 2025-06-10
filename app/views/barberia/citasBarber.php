@@ -79,9 +79,10 @@ $barberos = $citaModel->obtenerBarberosPorBarberia($idBarberia);
                             <p><strong>Fecha:</strong> <?= date('d/m/Y', strtotime($cita['fecha_hora'])) ?></p>
                             <p><strong>Hora:</strong> <?= date('H:i', strtotime($cita['fecha_hora'])) ?></p>
                             <p><strong>Método de pago:</strong> <?= htmlspecialchars($cita['metodo_pago']) ?></p>
+                            <p><strong>Estado: </strong><?= htmlspecialchars($cita['estado']) ?></p>
                             <div class="botones-citas">
                                 <button @click="abrirModal('realizada', <?= $cita['id'] ?>)" class="boton-estandar">Realizada</button>
-                                <button @click="abrirModal('cancelar', <?= $cita['id'] ?>)" class="boton-cerrar">Cancelar</button>
+                                <button @click="abrirModal('cancelada', <?= $cita['id'] ?>)" class="boton-cerrar">Cancelar</button>
                             </div>
                         </div>
                     <?php endforeach; ?>

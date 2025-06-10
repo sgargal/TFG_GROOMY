@@ -159,6 +159,20 @@ class Cita {
         ]);
     }
 
+    public function obtenerInfoCita($id)
+    {
+        $stmt = $this->db->prepare("
+        SELECT 
+            c.fecha_hora,
+            u.email,
+            u.nombre AS nombre_usuario
+        FROM cita c
+        JOIN usuarios u ON c.id_usuario = u.id
+        WHERE c.id = :id
+    ");
+        $stmt->execute([':id' => $id]);
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
 
 }
 
