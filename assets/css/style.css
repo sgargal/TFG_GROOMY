@@ -592,13 +592,29 @@ footer.footer img:hover {
 }
 
 .mensaje-exito {
+  font-family: 'Monserrat', sans-serif;
     color: green;
     font-weight: bold;
     margin-top: 10px;
     text-align: center;
 }
 
+.mensaje-exito-update {
+  font-family: 'Montserrat', sans-serif;
+  color: #155724;
+  background-color: #d4edda;
+  border: 1px solid #c3e6cb;
+  padding: 12px 16px;
+  margin: 20px auto;
+  border-radius: 8px;
+  max-width: 500px;
+  text-align: center;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  font-weight: 600;
+} 
+
 .mensaje-error {
+  font-family: 'Monserrat', sans-serif;
     color: red;
     font-weight: bold;
     margin-top: 10px;

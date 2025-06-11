@@ -111,7 +111,9 @@ class UsuarioController {
             $_SESSION['usuario']['imagen'] = $nombreImg;
         }
 
-        $_SESSION['mensaje'] = $resultado;
+        $_SESSION['mensaje'] = $resultado
+            ? "Perfil actualizado correctamente."
+            : "Hubo un error al actualizar tu perfil.";
 
         header('Location: /dashboard/groomy/public/index.php');
         exit();

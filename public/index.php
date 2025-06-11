@@ -29,6 +29,12 @@ $barberias = $barberiaController->listarBarberias();
         ?>
     </header>
     <main>
+        <?php if (!empty($_SESSION['mensaje'])): ?>
+            <div id="mensajeFlash" class="mensaje-exito-update">
+                <?= htmlspecialchars($_SESSION['mensaje']) ?>
+            </div>
+            <?php unset($_SESSION['mensaje']); ?>
+        <?php endif; ?>
         <section class="contenedor-barberias">
             <?php foreach ($barberias as $barberia): ?>
                 <div class="tarjeta-barberia">
@@ -45,6 +51,18 @@ $barberias = $barberiaController->listarBarberias();
         include '../app/views/layout/footer.php';
         ?>
     </footer>
+
+    <script>
+        // Esperar 2 segundos y luego ocultar el mensaje
+        setTimeout(() => {
+            const mensaje = document.getElementById('mensajeFlash');
+            if (mensaje) {
+                mensaje.style.transition = "opacity 0.5s ease";
+                mensaje.style.opacity = 0;
+                setTimeout(() => mensaje.remove(), 500); // eliminar del DOM tras fundido
+            }
+        }, 2000);
+    </script>
 </body>
 
 </html>
