@@ -24,17 +24,21 @@ createApp ({
                     estado: this.accion
                 })
             })
-                .then(res => res.json())
+                .then(res => {
+                    if (!res.ok) throw new Error('Error HTTP');
+                    return res.json();
+                })
                 .then(data => {
                     if (data.message && data.message.includes('Cita actualizada')) {
                         this.mostrarModal = false;
                         location.reload();
                     } else {
-                        alert('Error: ' + data.message);
+                        alert('Error: ' + (data.message || 'Respuesta inesperada'));
                     }
                 })
-                .catch(error => {
-                    alert('Error de red o servidor: ' + error);
+                .catch(err => {
+                    console.error(err);
+                    alert('Error: ' + err.message);
                 });
         }
     }
