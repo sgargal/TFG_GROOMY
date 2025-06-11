@@ -222,6 +222,28 @@ class Barberia
                         ':url'     => $url
                     ]);
                 }
+                // 10. Horarios: eliminar antiguos y guardar nuevos
+                $this->db->prepare("DELETE FROM horario WHERE id_barberia = :barberia")
+                    ->execute([':barberia' => $barberiaId]);
+
+                $insertHorario = $this->db->prepare(
+                    "INSERT INTO horario (id_barberia, dia, hora_inicio, hora_fin) VALUES (:barberia, :dia, :inicio, :fin)"
+                );
+
+                foreach ($horarios as $h) {
+                    $dia    = $h['dia'] ?? '';
+                    $inicio = $h['inicio'] ?? '';
+                    $fin    = $h['fin'] ?? '';
+
+                    if ($dia && $inicio && $fin) {
+                        $insertHorario->execute([
+                            ':barberia' => $barberiaId,
+                            ':dia'      => $dia,
+                            ':inicio'   => $inicio,
+                            ':fin'      => $fin
+                        ]);
+                    }
+                }
             }
             return true;
         } catch (\PDOException $e) {
