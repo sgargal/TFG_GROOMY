@@ -28,7 +28,7 @@ $citas = $citaModel->obtenerCitasPorUsuario($usuario['id'], $estado);
     <link rel="icon" href="../../../assets/src/logoGROOMY-fondosin.png">
     <link rel="stylesheet" href="../../../assets/css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-      <script src="https://cdn.jsdelivr.net/npm/vue@3/dist/vue.global.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@3/dist/vue.global.js"></script>
 </head>
 
 <body>
@@ -51,7 +51,13 @@ $citas = $citaModel->obtenerCitasPorUsuario($usuario['id'], $estado);
                     <a href="?estado=realizada" class="boton-estado <?= $estado === 'realizada' ? 'activo' : '' ?>">Realizadas</a>
                 </div>
                 <?php if (empty($citas)): ?>
-                    <p>No tienes ninguna cita pendiente.</p>
+                    <?php if ($estado === 'realizada'): ?>
+                        <p>No tienes ninguna cita realizada.</p>
+                    <?php elseif ($estado === 'pendientes'): ?>
+                        <p>No tienes ninguna cita pendiente.</p>
+                    <?php else: ?>
+                        <p>No tienes citas registradas.</p>
+                    <?php endif; ?>
                 <?php else: ?>
                     <div class="lista-citas">
                         <?php foreach ($citas as $cita): ?>
