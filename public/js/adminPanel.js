@@ -8,7 +8,9 @@ createApp({
                 nombre: '',
                 email: '',
                 password: ''
-            }
+            }, 
+            mensaje: '',
+            tipoMensaje: ''
         };
     },
     methods: {
@@ -58,16 +60,24 @@ createApp({
                 }
 
                 if (resultado.success) {
-                    alert('¡Barbería registrada con éxito!');
-                    this.cerrarModalBarberia();
-                    this.barberia = {
-                        nombre: '',
-                        email: '',
-                        password: ''
-                    };
+                    this.mensaje = '¡Barbería registrada con éxito!';
+                    this.tipoMensaje = 'exito';
+
+                    setTimeout(() => {
+                        this.cerrarModalBarberia();
+                        this.barberia = {
+                            nombre: '',
+                            email: '',
+                            password: ''
+                        };
+                        this.mensaje = '';
+                        this.tipoMensaje = '';
+                    }, 2000);
                 } else {
-                    alert('Error: ' + resultado.mensaje);
+                    this.mensaje = resultado.mensaje || 'Error al registrar la barbería.';
+                    this.tipoMensaje = 'error';
                 }
+
             } catch (error) {
                 console.error('Error de conexión:', error);
                 alert('Error de conexión. Por favor, inténtalo de nuevo más tarde.');

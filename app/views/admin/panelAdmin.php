@@ -70,6 +70,9 @@
 
                     <button type="button" class="boton-estandar" @click="generarPassword">Generar contraseña</button>
 
+                    <div v-if="mensaje" :class="['mensaje-flash-admin', tipoMensaje]">
+                        {{ mensaje }}
+                    </div>
 
                     <button type="submit" class="boton-estandar"><i class="fa fa-plus"></i> Crear Barbería</button>
                 </form>
