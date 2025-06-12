@@ -64,7 +64,7 @@
                     <div class="campo-password">
                         <input type="text" id="passwordBarberia" v-model="barberia.password" readonly>
                         <button type="button" @click="copiarPassword" class="boton-copiar" title="Copiar">
-                            <i class="fa fa-copy"></i>
+                            <i :class="copiado ? 'fa fa-check' : 'fa fa-copy'"></i>
                         </button>
                     </div>
 

@@ -10,7 +10,8 @@ createApp({
                 password: ''
             }, 
             mensaje: '',
-            tipoMensaje: ''
+            tipoMensaje: '',
+            copiado: false
         };
     },
     methods: {
@@ -27,11 +28,15 @@ createApp({
             if (this.barberia.password) {
                 navigator.clipboard.writeText(this.barberia.password)
                     .then(() => {
-                        alert('Contraseña copiada al portapapeles');
+                        this.copiado = true;
+                        setTimeout(() => {
+                            this.copiado = false;
+                        }, 2000);
                     })
                     .catch(err => {
                         console.error('Error al copiar la contraseña:', err);
-                        alert('No fue posible copiar la contraseña.');
+                        this.mensaje = 'No fue posible copiar la contraseña.';
+                        this.tipoMensaje = 'error';
                     });
             }
         },
