@@ -64,8 +64,15 @@ class UsuarioController {
             exit();
         }
 
-
         $_SESSION['usuario'] = $usuario;
+
+        // Si es barbería y es su primer login, mostrar mensaje y marcar como visto
+        if ($usuario['rol'] === 'barberia' && $usuario['primer_login'] == 1) {
+            $_SESSION['mostrar_mensaje_inicio'] = true;
+
+            // Llamar al modelo para marcar primer_login = 0
+            $usuarioModel->marcarPrimerLoginComoVisto($usuario['id']);
+        }
         echo json_encode(['success' => true, 'mensaje' => 'Inicio de sesión exitoso']);
         exit();
     }

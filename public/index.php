@@ -1,5 +1,12 @@
 <?php
 session_start();
+
+$mostrarMensajeInicio = false;
+
+if (isset($_SESSION['mostrar_mensaje_inicio']) && $_SESSION['mostrar_mensaje_inicio']) {
+    $mostrarMensajeInicio = true;
+    unset($_SESSION['mostrar_mensaje_inicio']);
+}
 require_once '../app/controllers/UsuarioController.php';
 require_once '../app/controllers/BarberiaController.php';
 
@@ -20,6 +27,8 @@ $barberias = $barberiaController->listarBarberias();
     <title>GROOMY</title>
     <link rel="icon" type="image/png" href="/dashboard/groomy/assets/src/logoGROOMY-fondosin.png">
     <link rel="stylesheet" href="../assets/css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
 </head>
 
 <body>
@@ -63,6 +72,41 @@ $barberias = $barberiaController->listarBarberias();
             }
         }, 2000);
     </script>
+    <?php if ($mostrarMensajeInicio): ?>
+        <script>
+            Swal.fire({
+                title: '¡Bienvenido a Groomy!',
+                html: `<div style="font-family: 'Montserrat', sans-serif; text-align: center;">
+                    <p style="font-size: 15px; margin-bottom: 15px;">
+                        Para que los clientes puedan reservar contigo, necesitas completar tu perfil.
+                    </p>
+                    <a href="../app/views/barberia/editarPerfilBarber.php"
+                        style="
+                        display: inline-block;
+                        background-color: #1abc9c;
+                        color: white;
+                        padding: 10px 20px;
+                        border-radius: 8px;
+                        font-weight: bold;
+                        text-decoration: none;
+                        font-family: 'Montserrat', sans-serif;
+                        border: 2px solid rgb(3, 52, 42); 
+                        ">
+                        Completar perfil
+                    </a>
+                    </div>`,
+                icon: 'info',
+                showConfirmButton: false,
+                background: '#f5f5f5',
+                color: '#333',
+                customClass: {
+                    title: 'swal-title-custom'
+                }
+            });
+        </script>
+
+    <?php endif; ?>
+
 </body>
 
 </html>

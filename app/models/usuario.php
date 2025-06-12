@@ -81,6 +81,20 @@ class Usuario {
         }
     }
 
+    public function marcarPrimerLoginComoVisto($id) {
+        try{
+            $this->db = new Conexion();
+            $sql = "UPDATE usuarios SET primer_login = 0 WHERE id = :id";
+            $stmt = $this->db->Conectar()->prepare($sql);
+            $stmt->bindParam(':id', $id);
+            $stmt->execute();
+
+            $this->db->cerrarBD();
+        }catch (PDOException $e){
+            error_log('Error al marcar primer login: ' . $e->getMessage());
+        }
+    }
+
     public function editarUsuario($id, $nombre, $email, $password = null, $img = null, $rol) {
     try {
         $this->db = new Conexion();

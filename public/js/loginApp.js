@@ -86,7 +86,7 @@ const App = defineComponent({
             this.mensaje = 'Inicio de sesión exitoso.';
 
             setTimeout(() => {
-              location.reload();
+              window.location.href = '/dashboard/groomy/public/index.php';
             }, 2200);
           } else {
             this.tipoMensaje = 'error';
