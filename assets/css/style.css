@@ -636,8 +636,11 @@ footer.footer img:hover {
 /* Contenedor tipo grid */
 .grid-admin {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 30px;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 40px;
+    padding: 40px 20px;
+    max-width: 1100px;
+    margin: 0 auto;
     justify-items: center;
 }
 
@@ -650,6 +653,10 @@ footer.footer img:hover {
     text-align: center;
     max-width: 300px;
     transition: transform 0.3s ease;
+    width: 100%;
+    height: 125px;
+    word-break: break-word;
+    margin: 0 10px;
 }
 
 .bloque-admin:hover {
@@ -658,9 +665,13 @@ footer.footer img:hover {
 
 .bloque-admin h3 {
     color: #39a9a7;
-    font-size: 1.3rem;
-    margin-bottom: 20px;
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+    font-weight: 600;
+    line-height: 1.2;
+    padding: 0 5px;
 }
+
 
 .bloque-admin .boton-estandar {
     font-size: 1rem;

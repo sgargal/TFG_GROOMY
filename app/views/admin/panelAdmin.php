@@ -32,20 +32,16 @@
                     <button class="boton-estandar" @click="mostrarModalBarberia = true"><i class="fa fa-plus"></i> Añadir Barbería</button>
                 </section>
                 <section class="bloque-admin">
-                    <h3>Ver cosas</h3>
-                    <button class="boton-estandar"><i class="fa fa-plus"></i> Añadir Barbería</button>
+                    <h3>Sugerencias e incidencias</h3>
+                    <button class="boton-estandar"><i class="fa fa-plus"></i> Ver más</button>
                 </section>
                 <section class="bloque-admin">
-                    <h3>Ver cosas</h3>
-                    <button class="boton-estandar"><i class="fa fa-plus"></i> Añadir Barbería</button>
+                    <h3>Configuración</h3>
+                    <button class="boton-estandar"><i class="fa fa-plus"></i> Ver más</button>
                 </section>
                 <section class="bloque-admin">
-                    <h3>Ver cosas</h3>
-                    <button class="boton-estandar"><i class="fa fa-plus"></i> Añadir Barbería</button>
-                </section>
-                <section class="bloque-admin">
-                    <h3>Ver cosas</h3>
-                    <button class="boton-estandar"><i class="fa fa-plus"></i> Añadir Barbería</button>
+                    <h3>Estadísticas</h3>
+                    <button class="boton-estandar"><i class="fa fa-plus"></i> Ver más</button>
                 </section>
             </section>
         </section>
