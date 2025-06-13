@@ -1170,7 +1170,7 @@ footer.footer img:hover {
 }
 
 .modal-box {
-  background-color: #b8efe8;
+  background-color: #121212;
   padding: 40px 30px;
   border-radius: 20px;
   max-width: 400px;
@@ -1189,7 +1189,7 @@ footer.footer img:hover {
 .modal-box p {
   font-size: 1.2rem;
   margin-bottom: 25px;
-  color: #333;
+  color: #bdbdbd;
 }
 
 .modal-box button {
@@ -1210,7 +1210,7 @@ footer.footer img:hover {
 }
 
 .modal-box button:last-of-type {
-  background-color: #bdd9d7;
+  background-color: #bdd9d7af;
   color: #303030;
 }
 

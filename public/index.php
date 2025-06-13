@@ -27,6 +27,7 @@ $barberias = $barberiaController->listarBarberias();
     <title>GROOMY</title>
     <link rel="icon" type="image/png" href="/dashboard/groomy/assets/src/logoGROOMY-fondosin.png">
     <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="../assets/css/responsives.css">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
 </head>

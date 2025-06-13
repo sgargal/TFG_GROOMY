@@ -37,6 +37,7 @@ $horarios = $barberiaModel->obtenerHorarios($barberia['id']);
     <title><?= htmlspecialchars($barberia['nombre']) ?> | INFO</title>
     <link rel="icon" href="../../../assets/src/logoGROOMY-fondosin.png">
     <link rel="stylesheet" href="../../../assets/css/style.css">
+    <link rel="stylesheet" href="../../../assets/css/responsives.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/vue@3/dist/vue.global.js"></script>
 </head>
@@ -80,7 +81,7 @@ $horarios = $barberiaModel->obtenerHorarios($barberia['id']);
                 <ul class="lista-servicios">
                     <?php foreach ($servicios as $servicio): ?>
                         <li class="servicio-item">
-                            <span class="servicio-link" @click="seleccionarServicio('<?= htmlspecialchars($servicio['nombre'], ENT_QUOTES) ?>')">
+                            <span class="servicio-link" @click="seleccionarServicio(<?= $servicio['id'] ?>, '<?= htmlspecialchars($servicio['nombre'], ENT_QUOTES) ?>')">
                                 <span class="nombre-servicio"><?= htmlspecialchars($servicio['nombre']) ?></span>
                                 <span class="precio-servicio"><?= htmlspecialchars($servicio['precio']) ?> €</span>
                             </span>
@@ -149,8 +150,8 @@ $horarios = $barberiaModel->obtenerHorarios($barberia['id']);
             <div v-if="mostrarModalLogin" class="modal-overlay">
                 <div class="modal-box">
                     <p>Para reservar una cita necesitas iniciar sesión</p>
-                    <button @click="cerrarModal">Cerrar</button>
                     <button @click="irAlInicio">Iniciar sesión</button>
+                    <button @click="cerrarModal">Cerrar</button>
                 </div>
             </div>
 

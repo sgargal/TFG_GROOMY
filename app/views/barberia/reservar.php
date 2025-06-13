@@ -104,7 +104,9 @@ $servicioSeleccionado = isset($_GET['servicio']) ? (int)$_GET['servicio'] : null
                             <h3>Servicio:</h3>
                             <select name="id_servicio" v-model="servicioSeleccionado" required>
                                 <?php foreach ($servicios as $servicio): ?>
-                                    <option value="<?= $servicio['id'] ?>"><?= htmlspecialchars($servicio['nombre']) ?></option>
+                                    <option value="<?= $servicio['id'] ?>" <?= $servicioSeleccionado === $servicio['id'] ? 'selected' : '' ?>>
+                                        <?= htmlspecialchars($servicio['nombre']) ?>
+                                    </option>
                                 <?php endforeach; ?>
                             </select>
                         </section>

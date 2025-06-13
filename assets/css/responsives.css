@@ -1,0 +1,368 @@
+/* ========================
+   RESPONSIVE - TABLET
+======================== */
+@media (max-width: 768px) {
+    .header-inicio nav {
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .header-inicio nav img {
+        width: 100px;
+        height: auto;
+    }
+
+    .boton-estandar {
+        width: 90%;
+        font-size: 1rem;
+        text-align: center;
+    }
+}
+
+/* ========================
+   RESPONSIVE - MÓVIL
+======================== */
+@media (max-width: 480px) {
+  /* HEADER */
+  .header-inicio nav {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 15px 0;
+    gap: 10px;
+  }
+
+  .header-inicio nav ul {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0;
+    margin: 0;
+    gap: 10px;
+  }
+
+  .header-inicio nav ul li {
+    list-style: none;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+
+  .header-inicio nav ul li:nth-child(2),
+  .header-inicio nav ul li:nth-child(3) {
+    width: auto;
+    margin: 0;
+  }
+
+  .header-inicio nav ul li:nth-child(2) + li {
+    flex-direction: row;
+    gap: 10px;
+  }
+
+  .boton-perfil {
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    border-radius: 50%;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: transparent;
+    border: none;
+  }
+
+  .boton-perfil span {
+    display: none;
+  }
+
+  .imagen-perfil {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 70%;
+    display: block;
+  }
+
+  .boton-estandar {
+    min-width: 160px;
+    padding: 10px;
+    font-size: 1rem;
+    text-align: center;
+  }
+
+  .boton-estandar span {
+    display: none;
+  }
+
+  /* TARJETAS BARBERÍA */
+  .card-barberia {
+    width: 90%;
+    margin: 15px auto;
+    padding: 10px;
+  }
+
+  .card-barberia h2 {
+    font-size: 1.1rem;
+    text-align: center;
+  }
+
+  .card-barberia p {
+    font-size: 0.95rem;
+    text-align: center;
+  }
+
+  .card-barberia .boton-estandar {
+    width: 100%;
+    padding: 8px;
+    font-size: 0.95rem;
+  }
+
+
+  /* MODALES */
+  .modal-overlay,
+    .modal-overlay-perfil,
+    .modal-overlay-cerrar {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 10px;
+    }
+    
+  .modal-content,
+  .modal-content-perfil,
+  .modal-content-cerrar,
+  .modal-box {
+    width: 80%;
+    max-width: 360px;
+    padding: 20px;
+    font-size: 0.95rem;
+    background-color: #121212;
+    border-radius: 16px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+  }
+
+  .modal-content form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .modal-content form label {
+    font-size: 0.95rem;
+    font-weight: 600;
+  }
+
+  .modal-content form input[type="text"],
+  .modal-content form input[type="email"] {
+    width: 93%;
+    padding: 10px;
+    font-size: 1rem;
+    border-radius: 8px;
+    border: none;
+    background-color: #1f1f1f;
+    color: white;
+  }
+
+  .campo-password {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+  }
+
+  .campo-password input {
+    flex: 1;
+  }
+
+  .campo-password button {
+    padding: 8px 10px;
+    font-size: 1rem;
+    background-color: #00ccc0;
+    border-radius: 8px;
+    border: none;
+    color: white;
+  }
+
+  .modal-content button[type="submit"] {
+    width: 100%;
+    padding: 12px;
+    font-size: 1rem;
+    border-radius: 10px;
+    background-color: #00ccc0;
+    color: white;
+    font-weight: bold;
+    border: none;
+    margin-top: 10px;
+  }
+
+  .modal-content button:last-of-type {
+    margin-top: 10px;
+    background: none;
+    color: white;
+    text-decoration: underline;
+    padding: 6px;
+    font-size: 0.95rem;
+  }
+
+  /* CITAS (Usuario y Barbería) */
+  .citas-usuario {
+    padding: 20px 10px;
+  }
+
+  .botones-citas {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+
+  .boton-estado {
+    padding: 8px 12px;
+    font-size: 0.9rem;
+    border-radius: 10px;
+    white-space: nowrap;
+  }
+
+  .lista-citas {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .cita-item {
+    padding: 12px;
+    border-radius: 12px;
+    font-size: 0.95rem;
+    line-height: 1.4;
+    height: 50%;
+    width: 90%;
+  }
+
+  .cita-item p {
+    margin-bottom: 6px;
+    word-wrap: break-word;
+  }
+
+  .botones-citas .boton-cerrar {
+    font-size: 0.9rem;
+    padding: 6px 12px;
+    border-radius: 8px;
+  }
+
+  h2 {
+    font-size: 1.3rem;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+
+  /* FILTROS CITAS (barbería) */
+  .contenedor-citas-barberia {
+    padding: 20px 10px;
+  }
+
+  .filtros-citas-barberia {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    align-items: stretch;
+    margin: 20px auto;
+    max-width: 100%;
+    padding: 25px 10px;
+  }
+
+  .filtros-citas-barberia label {
+    font-size: 0.95rem;
+    margin-bottom: 4px;
+  }
+
+  .filtros-citas-barberia input,
+  .filtros-citas-barberia select {
+    padding: 8px;
+    font-size: 1rem;
+    border-radius: 8px;
+  }
+
+  .filtros-citas-barberia .boton-estandar {
+    align-self: center;
+    padding: 8px 16px;
+    font-size: 1rem;
+  }
+
+  /* PANEL ADMIN */
+  .botones-admin h1 {
+    font-size: 1.5rem;
+    text-align: center;
+    margin-bottom: 15px;
+  }
+
+  .grid-admin {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    padding: 10px;
+  }
+
+  .bloque-admin {
+    padding: 15px;
+    border: 1px solid #ccc;
+    border-radius: 12px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    text-align: center;
+  }
+
+  .bloque-admin h3 {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+  }
+
+  .bloque-admin .boton-estandar {
+    width: 100%;
+    padding: 10px;
+    font-size: 1rem;
+  }
+
+  .mensaje-flash-admin {
+    margin-top: 10px;
+    text-align: center;
+  }
+
+  /* FOOTER */
+  .footer nav {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    padding: 20px 10px;
+    text-align: center;
+  }
+
+  .footer-links {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 0;
+    margin: 0;
+  }
+
+  .footer-links li {
+    list-style: none;
+  }
+
+  .footer-redes {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    padding: 0;
+    margin: 0;
+  }
+
+  .footer-redes li {
+    list-style: none;
+  }
+
+  .footer-redes img {
+    width: 30px;
+    height: 30px;
+  }
+}

@@ -15,6 +15,7 @@ $rol = $usuario['rol'] ?? null;
     <title>GROOMY</title>
     <link rel="icon" href="../../../assets/src/logoGROOMY-fondosin.png">
     <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="../assets/css/responsives.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/vue@3/dist/vue.global.js"></script>
     <script>
@@ -36,19 +37,19 @@ $rol = $usuario['rol'] ?? null;
                             </li>
                         <?php else: ?>
                             <li>
-                                <button @click="mostrarPerfil = true" class="boton-estandar">
+                                <button @click="mostrarPerfil = true" class="boton-perfil">
                                     <?php if (!empty($usuario['imagen'])): ?>
                                         <img src="../assets/src/users/<?= $usuario['imagen'] ?>" alt="Foto usuario" class="imagen-perfil" />
                                     <?php else: ?>
                                         <i class="fa fa-user"></i>
                                     <?php endif; ?>
-                                    <?= htmlspecialchars($usuario['nombre']) ?>
+                                    <span><?= htmlspecialchars($usuario['nombre']) ?></span>
                                 </button>
                             </li>
                             <?php if ($rol === 'barberia'): ?>
-                                <li><a href="../app/views/barberia/citasBarber.php" class="boton-perfil"><i class="fa fa-calendar"></i> Citas</a></li>
+                                <li><a href="../app/views/barberia/citasBarber.php" class="boton-estandar"><i class="fa fa-calendar"></i><span> Citas</span></a></li>
                             <?php elseif ($rol === 'user'): ?>
-                                <li><a href="../app/views/usuario/citas.php?estado=pendiente" class="boton-perfil"><i class="fa fa-calendar"></i> Citas</a></li>
+                                <li><a href="../app/views/usuario/citas.php?estado=pendiente" class="boton-estandar"><i class="fa fa-calendar"></i><span> Citas</span></a></li>
                             <?php endif; ?>
                         <?php endif; ?>
 
