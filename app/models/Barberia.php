@@ -222,7 +222,9 @@ class Barberia
                         ':url'     => $url
                     ]);
                 }
-                // 10. Horarios: eliminar antiguos y guardar nuevos
+                
+            }
+            // 10. Horarios: eliminar antiguos y guardar nuevos
                 $this->db->prepare("DELETE FROM horario WHERE id_barberia = :barberia")
                     ->execute([':barberia' => $barberiaId]);
 
@@ -244,7 +246,6 @@ class Barberia
                         ]);
                     }
                 }
-            }
             return true;
         } catch (\PDOException $e) {
             error_log("Error en editarBarberiaCompleta: " . $e->getMessage());

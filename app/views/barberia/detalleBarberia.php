@@ -80,7 +80,7 @@ $horarios = $barberiaModel->obtenerHorarios($barberia['id']);
                 <ul class="lista-servicios">
                     <?php foreach ($servicios as $servicio): ?>
                         <li class="servicio-item">
-                            <span class="servicio-link" @click="seleccionarServicio(<?= $servicio['id'] ?>, '<?= htmlspecialchars($servicio['nombre']) ?>')">
+                            <span class="servicio-link" @click="seleccionarServicio('<?= htmlspecialchars($servicio['nombre'], ENT_QUOTES) ?>')">
                                 <span class="nombre-servicio"><?= htmlspecialchars($servicio['nombre']) ?></span>
                                 <span class="precio-servicio"><?= htmlspecialchars($servicio['precio']) ?> €</span>
                             </span>
