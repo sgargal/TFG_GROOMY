@@ -99,15 +99,15 @@ if ($ok) {
             $nombre_barbero = $infoBarbero['nombre'] ?? 'No especificado';
         }
         // Calcular horas para Google Calendar
-        $start = date('Ymd\THis\Z', strtotime("$fecha $hora"));
-        $end = date('Ymd\THis\Z', strtotime("$fecha $hora +30 minutes")); // ajusta duración si hace falta
+        $start = date('Ymd\THis', strtotime("$fecha $hora"));
+        $end = date('Ymd\THis', strtotime("$fecha $hora +30 minutes")); // ajusta duración si hace falta
 
         $googleCalendarUrl = "https://www.google.com/calendar/render?action=TEMPLATE" .
             "&text=" . urlencode("Cita - $nombre_servicio") .
             "&dates={$start}/{$end}" .
             "&details=" . urlencode("Tu cita con $nombre_barbero para $nombre_servicio") .
             "&location=" . urlencode("Te esperamos en tu barbería favorita. ¡Gracias por usar Groomy!") .
-            "&sf=true&output=xml";
+            "&ctz=Europe/Madrid&sf=true&output=xml";
 
         $mail->Subject = 'Confirmación de tu reserva';
         $mail->Body    = "

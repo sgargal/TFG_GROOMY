@@ -1,0 +1,160 @@
+/* Responsive para tablets (481px a 768px) */
+@media (min-width: 481px) and (max-width: 768px) {
+  body {
+    padding: 1.5rem;
+  }
+
+  .btn-back {
+    font-size: 1rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .faq-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+    margin-bottom: 2rem;
+  }
+
+  .faq-header h1 {
+    font-size: 1.8rem;
+    text-align: left;
+  }
+
+  .search-container {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  input[type="text"] {
+    font-size: 1rem;
+    padding: 0.7rem 1rem;
+  }
+
+  .faq-item {
+    padding: 1.2rem;
+    font-size: 1rem;
+  }
+
+  .faq-item h3 {
+    font-size: 1.3rem;
+  }
+
+  .faq-contact {
+    padding: 1.5rem;
+  }
+
+  .faq-contact h2 {
+    font-size: 1.5rem;
+  }
+
+  input[type="email"],
+  textarea {
+    font-size: 1rem;
+  }
+
+  button[type="submit"] {
+    font-size: 1rem;
+    padding: 0.7rem 1.2rem;
+  }
+
+  .contact-info {
+    font-size: 1rem;
+  }
+
+  #socials {
+    width: 55px;
+    height: 55px;
+  }
+
+  .fa-brands {
+    font-size: 26px;
+  }
+}
+
+/* Responsive para móviles (hasta 480px) */
+@media (max-width: 480px) {
+  body {
+    padding: 1rem;
+  }
+
+  .btn-back {
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+  }
+
+  .faq-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .faq-header h1 {
+    font-size: 1.5rem;
+    text-align: left;
+  }
+
+  .search-container {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  input[type="text"] {
+    font-size: 0.95rem;
+    padding: 0.6rem 0.8rem;
+  }
+
+  .faq-item {
+    padding: 1rem;
+    font-size: 0.95rem;
+  }
+
+  .faq-item h3 {
+    font-size: 1.1rem;
+  }
+
+  .faq-item p {
+    font-size: 0.95rem;
+  }
+
+  .faq-contact {
+    padding: 1.2rem;
+  }
+
+  .faq-contact h2 {
+    font-size: 1.3rem;
+  }
+
+  .faq-contact h3 {
+    font-size: 1.1rem;
+  }
+
+  input[type="email"],
+  textarea {
+    font-size: 0.95rem;
+  }
+
+  button[type="submit"] {
+    font-size: 0.95rem;
+    padding: 0.6rem 1rem;
+  }
+
+  .contact-info {
+    font-size: 0.9rem;
+  }
+
+  .social-links ul {
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  #socials {
+    width: 50px;
+    height: 50px;
+  }
+
+  .fa-brands {
+    font-size: 24px;
+  }
+}

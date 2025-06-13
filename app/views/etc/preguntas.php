@@ -6,6 +6,7 @@
   <title>Preguntas Frecuentes</title>
   <link rel="icon" href="../../../assets/src/logoGROOMY-fondosin.png">
   <link rel="stylesheet" href="../../../assets/css/style-etc.css">
+  <link rel="stylesheet" href="../../../assets/css/responsives-etc.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
   <script src="https://cdn.jsdelivr.net/npm/vue@3/dist/vue.global.prod.js"></script>
 </head>
