@@ -3,3 +3,5 @@
 
 # Ignorar dependencias instaladas por Composer
 /vendor
+
+Arreglos
